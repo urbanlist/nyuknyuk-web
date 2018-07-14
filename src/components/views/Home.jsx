@@ -1,25 +1,62 @@
 import React from 'react';
 import cloud from '../../../assets/weather/cloud.svg';
+import Random from '../modules/Random.js';
 import './Home.styl';
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cloudPositions: [
+        Random(0,window.innerWidth),
+        Random(0,window.innerWidth),
+        Random(0,window.innerWidth),
+        Random(0,window.innerWidth)]
+    };
+  }
+
+  componentDidMount() {
+    this.timer = window.setTimeout(this.moveCloud(), 100);
+    this.timer = window.setInterval(this.moveCloud(), 4000);
+  }
+
+  moveCloud() {
+    return () => {
+      let arr = this.state.cloudPositions;
+      for (let idx = 0; idx < arr.length; idx++) {
+        if (arr[idx] > window.innerWidth + 450) {
+          arr[idx] = 0;
+        }
+        else {
+          arr[idx] += Random(100, window.innerWidth/2);
+        }
+      }
+      this.setState({
+        cloudPositions: arr
+      });
+    };
+  }
+
+  componentWillUnmount() {
+    window.clearTimeout(this.timer);
+  }
+
   render() {
-    let getRandomStyle = () => {
-      let randomValue = Math.floor((Math.random() * 10) + 1);
-      let width = randomValue * 30;
-      let height = randomValue * 10;
-      let startLeft = Math.floor((Math.random() * 100) + 1) * 3;
+    let cloudPositions = this.state.cloudPositions;
+    let getRandomStyle = (position) => {
       return {
-        'width': 450,
-        'height': 150,
-        'left': -startLeft - 600,
-        'top':startLeft * 0.1
+        'left': position - 300,
+        'visibility': position > 0 ? 'visible' : 'collapse',
+        'transition': 'left linear 4s'
       }
     }
+
     let clouds = [];
-    for(let idx = 0; idx < 4; idx++) {
+    for(let idx = 0; idx < cloudPositions.length; idx++) {
       clouds.push(
-        <img key={idx} src={cloud} style={getRandomStyle()} />
+        <div key={idx}>
+          <img src={cloud} style={getRandomStyle(cloudPositions[idx])} />
+        </div>
       )
     }
     
