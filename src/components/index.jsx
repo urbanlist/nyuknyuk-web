@@ -23,7 +23,7 @@ class Index extends React.Component {
       <div className={indexClasses} >
         <Router ref={ref => this.router = ref}>
           <div className="router">
-            <Route exact path={"/"} render={props => {
+            <Route exact path={PRODUCTION ? "/content/nyuknyuk" : "/"} render={props => {
               return <Home />;
             }}/>
           </div>
