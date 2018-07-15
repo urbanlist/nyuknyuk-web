@@ -5,6 +5,48 @@ import WeatherController from '../modules/WeatherController.js';
 import Timer from '../modules/Timer.js';
 import './Home.styl';
 
+
+let skyCodeToName = code => {
+  let dic = {
+    "SKY_A01":"맑음",
+    "SKY_A02":"구름 조금",
+    "SKY_A03":"구름 많음",
+    "SKY_A04":"구름 많고 비",
+    "SKY_A05":"구름 많고 눈",
+    "SKY_A06":"구름 많고 비 또는 눈",
+    "SKY_A07":"흐림",
+    "SKY_A08":"흐리고 비",
+    "SKY_A09":"흐리고 눈",
+    "SKY_A10":"흐리고 비 또는 눈",
+    "SKY_A11":"흐리고 낙뢰",
+    "SKY_A12":"뇌우/비",
+    "SKY_A13":"뇌우/눈",
+    "SKY_A14":"뇌우/비 또는 눈",
+    "none":"알 수 없음"
+  }
+  return dic[code];
+}
+
+
+let monthToName = month => {
+  let dic = {
+    1: "Jan",
+    2: "Feb",
+    3: "Mar",
+    4: "Apr",
+    5: "May",
+    6: "Jun",
+    7: "Jul",
+    8: "Aug",
+    9: "Sep",
+    10: "Oct",
+    11: "Nov",
+    12: "Dec"
+  }
+  return dic[month];
+}
+
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -55,7 +97,7 @@ class Home extends React.Component {
     this.weatherController.get(data => {
       this.setState({
         temperature: data.temperature,
-        skyStatus: data.sky.status,
+        skyStatus: skyCodeToName(data.sky.status),
         windSpeed: data.wind.speed,
         color: data.color
       });
@@ -71,7 +113,7 @@ class Home extends React.Component {
     let min = date.getMinutes();
 
     this.setState({
-      date: hour + ':' + min + ' ' + day + ', ' + month + ', ' + year
+      date: hour + ':' + min + ' ' + day + ', ' + monthToName(month) + ', ' + year
     });
   }
 
