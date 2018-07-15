@@ -87,7 +87,7 @@ module.exports = (env) => {
             loader: 'file-loader',
             options: {
               name: '[path][name].[ext]',
-              publicPath: '/',
+              publicPath: '//urbanlist.blob.core.windows.net/web/contents/nyuknyuk/',
               outputPath: isDevBuild ? './' : '../'
             }
           }
