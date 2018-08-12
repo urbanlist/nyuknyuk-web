@@ -2,6 +2,7 @@ import React from 'react';
 import cloud from '../../../assets/weather/cloud.svg';
 import Random from '../modules/Random.js';
 import WeatherController from '../modules/WeatherController.js';
+import NewsController from '../modules/NewsController.js';
 import Timer from '../modules/Timer.js';
 import './Home.styl';
 
@@ -72,10 +73,12 @@ class Home extends React.Component {
           green: 0,
           blue: 0
         },
-      }
+      },
+      newsArticles: []
     };
 
     this.weatherController = new WeatherController();
+    this.newsController = new NewsController();
     this.weatherTimer = new Timer(this.setWeather.bind(this), 60 * 1000);
     this.clockTimer = new Timer(this.setClock.bind(this), 60 * 1000);
   }
@@ -85,6 +88,12 @@ class Home extends React.Component {
     this.clockTimer.start();
     this.timer = window.setTimeout(this.moveCloud(), 100);
     this.timer = window.setInterval(this.moveCloud(), 4000);
+
+    this.newsController.get(data => {
+      this.setState({
+        newsArticles: data.articles
+      });
+    });
   }
 
   componentWillUnmount() {
@@ -125,6 +134,7 @@ class Home extends React.Component {
           arr[idx] = 0;
         }
         else {
+          // 구름 속도
           arr[idx] += Random(100, window.innerWidth/2);
         }
       }
@@ -135,6 +145,7 @@ class Home extends React.Component {
   }
 
   render() {
+    let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : ["북미, 일부 성과에도 입장차 확인…후속협상에 공 넘겨"];
     let cloudPositions = this.state.cloudPositions;
     let getRandomStyle = (position) => {
       return {
@@ -174,7 +185,7 @@ class Home extends React.Component {
               {this.state.date}
             </div>
             <div className="content">
-              {"북미, 일부 성과에도 입장차 확인…후속협상에 공 넘겨"}
+              {newsArticles[0].title}
             </div>
           </div>
         </div>
