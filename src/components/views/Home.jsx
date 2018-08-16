@@ -4,6 +4,8 @@ import Random from '../modules/Random.js';
 import WeatherController from '../modules/WeatherController.js';
 import NewsController from '../modules/NewsController.js';
 import Timer from '../modules/Timer.js';
+import CloudLayer from '../Layers/CloudLayer.jsx';
+import OvercastLayer from '../Layers/OvercastLayer.jsx';
 import './Home.styl';
 
 
@@ -190,7 +192,8 @@ class Home extends React.Component {
           </div>
         </div>
         <div className="background">
-          {clouds}
+          {/* {clouds} */}
+          {<OvercastLayer />}
         </div>
       </div>
     )
