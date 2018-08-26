@@ -1,0 +1,50 @@
+.cloud-layer
+  @media screen and (min-width 200px)
+    @keyframes cloud
+      0%
+        transform translateX(-100%)
+      100%
+        transform translateX(500px)
+  @media screen and (min-width 500px)
+    @keyframes cloud
+      0%
+        transform translateX(-100%)
+      100%
+        transform translateX(750px)
+  @media screen and (min-width 750px)
+    @keyframes cloud
+      0%
+        transform translateX(-100%)
+      100%
+        transform translateX(1000px)
+  @media screen and (min-width 1000px)
+    @keyframes cloud
+      0%
+        transform translateX(-100%)
+      100%
+        transform translateX(1500px)
+  @media screen and (min-width 1500px)
+    @keyframes cloud
+      0%
+        transform translateX(-100%)
+      100%
+        transform translateX(0%)
+  @media screen and (min-width 2000px)
+    @keyframes cloud
+      0%
+        transform translateX(-100%)
+      100%
+        transform translateX(2500px)
+  .cloud-transition
+    transition transform 2s
+  .cloud-more
+    background-image url("../../../assets/weather/cloud2.svg")
+    background-repeat no-repeat
+    background-size 100% 100%
+    width 300px
+    height 150px
+  .cloud
+    transform translateX(-100%)
+    // animation cloud 4s 1s infinite linear
+    // transition transform 4s linear
+    
