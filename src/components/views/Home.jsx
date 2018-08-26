@@ -88,8 +88,6 @@ class Home extends React.Component {
   componentDidMount() {
     this.weatherTimer.start();
     this.clockTimer.start();
-    this.timer = window.setTimeout(this.moveCloud(), 100);
-    this.timer = window.setInterval(this.moveCloud(), 4000);
 
     this.newsController.get(data => {
       this.setState({
@@ -126,24 +124,6 @@ class Home extends React.Component {
     this.setState({
       date: hour + ':' + min + ' ' + day + ', ' + monthToName(month) + ', ' + year
     });
-  }
-
-  moveCloud() {
-    return () => {
-      let arr = this.state.cloudPositions;
-      for (let idx = 0; idx < arr.length; idx++) {
-        if (arr[idx] > window.innerWidth + 450) {
-          arr[idx] = 0;
-        }
-        else {
-          // 구름 속도
-          arr[idx] += Random(100, window.innerWidth/2);
-        }
-      }
-      this.setState({
-        cloudPositions: arr
-      });
-    };
   }
 
   render() {
@@ -193,7 +173,8 @@ class Home extends React.Component {
         </div>
         <div className="background">
           {/* {clouds} */}
-          {<OvercastLayer />}
+          {<CloudLayer windSpeed={this.state.windSpeed}/>}
+          {/* <OvercastLayer windSpeed={this.state.windSpeed}/> */}
         </div>
       </div>
     )
