@@ -13,8 +13,9 @@ class OvercastLayer extends React.Component {
 
   render() {
     let width = window.innerWidth;
-    let pixelDistancePerSec = windSpeed * 10;
-    let seconds = ConvertWindSpeedToPixel(this.props.windSpeed);
+    let pixelDistancePerSec = this.props.windSpeed * 10;
+    // let seconds = ConvertWindSpeedToPixel(this.props.windSpeed);
+    let seconds = 15;
 
     return (
       <div className="overcast-layer">
