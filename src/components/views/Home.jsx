@@ -1,4 +1,5 @@
 import React from 'react';
+import queryString from 'query-string';
 import cloud from '../../../assets/weather/cloud.svg';
 import Random from '../modules/Random.js';
 import WeatherController from '../modules/WeatherController.js';
@@ -6,32 +7,107 @@ import NewsController from '../modules/NewsController.js';
 import Timer from '../modules/Timer.js';
 import CloudLayer from '../Layers/CloudLayer.jsx';
 import OvercastLayer from '../Layers/OvercastLayer.jsx';
+import RainLayer from '../Layers/RainLayer.jsx';
 import './Home.styl';
 
 
-let skyCodeToName = code => {
+let convertSkyCodeToName = code => {
   let dic = {
-    "SKY_A01":"맑음",
-    "SKY_A02":"구름 조금",
-    "SKY_A03":"구름 많음",
-    "SKY_A04":"구름 많고 비",
-    "SKY_A05":"구름 많고 눈",
-    "SKY_A06":"구름 많고 비 또는 눈",
-    "SKY_A07":"흐림",
-    "SKY_A08":"흐리고 비",
-    "SKY_A09":"흐리고 눈",
-    "SKY_A10":"흐리고 비 또는 눈",
-    "SKY_A11":"흐리고 낙뢰",
-    "SKY_A12":"뇌우/비",
-    "SKY_A13":"뇌우/눈",
-    "SKY_A14":"뇌우/비 또는 눈",
-    "none":"알 수 없음"
+    "SKY_A01": "맑음",
+    "SKY_A02": "구름 조금",
+    "SKY_A03": "구름 많음",
+    "SKY_A04": "구름 많고 비",
+    "SKY_A05": "구름 많고 눈",
+    "SKY_A06": "구름 많고 비 또는 눈",
+    "SKY_A07": "흐림",
+    "SKY_A08": "흐리고 비",
+    "SKY_A09": "흐리고 눈",
+    "SKY_A10": "흐리고 비 또는 눈",
+    "SKY_A11": "흐리고 낙뢰",
+    "SKY_A12": "뇌우/비",
+    "SKY_A13": "뇌우/눈",
+    "SKY_A14": "뇌우/비 또는 눈",
+    "none": "알 수 없음"
   }
   return dic[code];
 }
 
 
-let monthToName = month => {
+let convertSkyCodeToParameter = code => {
+  let result = {
+    isSnow: false,
+    isRain: false,
+    isThunder: false,
+    isOvercase: false,
+    cloudLevel: 0,
+  };
+
+  switch (code) {
+    case "SKY_A01":
+      result.cloudLevel = 1;
+      return result;
+    case "SKY_A02":
+      result.cloudLevel = 2;
+      return result;
+    case "SKY_A03":
+      result.cloudLevel = 3;
+      return result;
+    case "SKY_A04":
+      result.cloudLevel = 3;
+      result.isRain = true;
+      return result;
+    case "SKY_A05":
+      result.cloudLevel = 3;
+      result.isSnow = true;
+      return result;
+    case "SKY_A06":
+      result.cloudLevel = 3;
+      result.isRain = true;
+      result.isSnow = true;
+      return result;
+    case "SKY_A07":
+      result.isOvercase = true;
+      return result;
+    case "SKY_A08":
+      result.isOvercase = true;
+      result.isRain = true;
+      return result;
+    case "SKY_A09":
+      result.isOvercase = true;
+      result.isSnow = true;
+      return result;
+    case "SKY_A10":
+      result.isOvercase = true;
+      result.isRain = true;
+      result.isSnow = true;
+      return result;
+    case "SKY_A11":
+      result.isOvercase = true;
+      result.isThunder = true;
+      return result;
+    case "SKY_A12":
+      result.isOvercase = true;
+      result.isThunder = true;
+      result.isRain = true;
+      return result;
+    case "SKY_A13":
+      result.isOvercase = true;
+      result.isThunder = true;
+      result.isSnow = true;
+      return result;
+    case "SKY_A14":
+      result.isOvercase = true;
+      result.isThunder = true;
+      result.isRain = true;
+      result.isSnow = true;
+      return result;
+    default:
+      return result;
+  }
+}
+
+
+let convertMonthToName = month => {
   let dic = {
     1: "Jan",
     2: "Feb",
@@ -56,11 +132,11 @@ class Home extends React.Component {
 
     this.state = {
       cloudPositions: [
-        Random(0,window.innerWidth),
-        Random(0,window.innerWidth),
-        Random(0,window.innerWidth),
-        Random(0,window.innerWidth)],
-      date:'-',
+        Random(0, window.innerWidth),
+        Random(0, window.innerWidth),
+        Random(0, window.innerWidth),
+        Random(0, window.innerWidth)],
+      date: '-',
       temperature: '-',
       skyStatus: '-',
       windSpeed: '-',
@@ -106,7 +182,7 @@ class Home extends React.Component {
     this.weatherController.get(data => {
       this.setState({
         temperature: data.temperature,
-        skyStatus: skyCodeToName(data.sky.status),
+        skyStatus: data.sky.status,
         windSpeed: data.wind.speed,
         color: data.color
       });
@@ -115,18 +191,25 @@ class Home extends React.Component {
 
   setClock() {
     let date = new Date();
-    let month = date.getMonth()+1;
+    let month = date.getMonth() + 1;
     let day = date.getDate();
     let year = date.getFullYear();
     let hour = date.getHours();
     let min = date.getMinutes();
 
     this.setState({
-      date: hour + ':' + min + ' ' + day + ', ' + monthToName(month) + ', ' + year
+      date: hour + ':' + min + ' ' + day + ', ' + convertMonthToName(month) + ', ' + year
     });
   }
 
   render() {
+    let parsed = queryString.parse(location.search);
+    let skyStatus = this.state.skyStatus;
+    if ("sky" in parsed) {
+      skyStatus = parsed.sky;
+    }
+    let skyAttrs = convertSkyCodeToParameter(skyStatus);
+
     let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : ["북미, 일부 성과에도 입장차 확인…후속협상에 공 넘겨"];
     let cloudPositions = this.state.cloudPositions;
     let getRandomStyle = (position) => {
@@ -138,7 +221,7 @@ class Home extends React.Component {
     }
 
     let clouds = [];
-    for(let idx = 0; idx < cloudPositions.length; idx++) {
+    for (let idx = 0; idx < cloudPositions.length; idx++) {
       clouds.push(
         <div key={idx}>
           <img src={cloud} style={getRandomStyle(cloudPositions[idx])} />
@@ -148,14 +231,14 @@ class Home extends React.Component {
 
     let color = this.state.color;
     let background = `background linear-gradient(to bottom,rgb(${color.start.red}, ${color.start.green}, ${color.start.blue}) , rgb(${color.end.red}, ${color.end.green}, ${color.end.blue}))`;
-    
+
     return (
       <div className="home" style={{
-       "background" : background
+        "background": background
       }}>
         <div className="top">
           <div className="weather">
-            {this.state.skyStatus + ", " + this.state.temperature + "°C"}
+            {convertSkyCodeToName(this.state.skyStatus) + ", " + this.state.temperature + "°C"}
           </div>
           <div className="place">
             {"SEOUL"}
@@ -172,9 +255,9 @@ class Home extends React.Component {
           </div>
         </div>
         <div className="background">
-          {/* {clouds} */}
-          {<CloudLayer windSpeed={this.state.windSpeed}/>}
-          {/* <OvercastLayer windSpeed={this.state.windSpeed}/> */}
+          {/* {<CloudLayer windSpeed={this.state.windSpeed}/>} */}
+          <OvercastLayer windSpeed={this.state.windSpeed} />
+          <RainLayer isRain={skyAttrs.isRain} isSnow={skyAttrs.isSnow} isThunder={skyAttrs.isThunder}/>
         </div>
       </div>
     )
