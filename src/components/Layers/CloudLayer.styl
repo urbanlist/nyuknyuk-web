@@ -1,4 +1,5 @@
 .cloud-layer
+  position fixed
   @media screen and (min-width 200px)
     @keyframes cloud
       0%
@@ -37,14 +38,14 @@
         transform translateX(2500px)
   .cloud-transition
     transition transform 2s
-  .cloud-more
+  .cloud-type-1
     background-image url("../../../assets/weather/cloud2.svg")
+  .cloud-type-2
+    background-image url("../../../assets/weather/cloud3.svg")
+  .cloud
+    transform translateX(-100%)
     background-repeat no-repeat
     background-size 100% 100%
     width 300px
     height 150px
-  .cloud
-    transform translateX(-100%)
-    // animation cloud 4s 1s infinite linear
-    // transition transform 4s linear
     
