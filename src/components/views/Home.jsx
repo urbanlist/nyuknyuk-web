@@ -1,5 +1,5 @@
 import React from 'react';
-import queryString from 'query-string';
+import getURLParam from 'get-url-param';
 import cloud from '../../../assets/weather/cloud.svg';
 import Random from '../modules/Random.js';
 import WeatherController from '../modules/WeatherController.js';
@@ -203,32 +203,15 @@ class Home extends React.Component {
   }
 
   render() {
-    let parsed = queryString.parse(location.search);
+    let parsed = getURLParam(location.search, "sky");
     let skyStatus = this.state.skyStatus;
-    if ("sky" in parsed) {
-      skyStatus = parsed.sky;
+    if (parsed) {
+      skyStatus = parsed;
     }
     let skyAttrs = convertSkyCodeToParameter(skyStatus);
 
     let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : ["북미, 일부 성과에도 입장차 확인…후속협상에 공 넘겨"];
-    let cloudPositions = this.state.cloudPositions;
-    let getRandomStyle = (position) => {
-      return {
-        'left': position - 300,
-        'visibility': position > 0 ? 'visible' : 'collapse',
-        'transition': 'left linear 4s'
-      }
-    }
-
-    let clouds = [];
-    for (let idx = 0; idx < cloudPositions.length; idx++) {
-      clouds.push(
-        <div key={idx}>
-          <img src={cloud} style={getRandomStyle(cloudPositions[idx])} />
-        </div>
-      )
-    }
-
+    
     let color = this.state.color;
     let background = `background linear-gradient(to bottom,rgb(${color.start.red}, ${color.start.green}, ${color.start.blue}) , rgb(${color.end.red}, ${color.end.green}, ${color.end.blue}))`;
 
@@ -255,8 +238,8 @@ class Home extends React.Component {
           </div>
         </div>
         <div className="background">
-          {/* {<CloudLayer windSpeed={this.state.windSpeed}/>} */}
-          <OvercastLayer windSpeed={this.state.windSpeed} />
+          {<CloudLayer windSpeed={this.state.windSpeed}/>}
+          {/* <OvercastLayer windSpeed={this.state.windSpeed} /> */}
           <RainLayer isRain={skyAttrs.isRain} isSnow={skyAttrs.isSnow} isThunder={skyAttrs.isThunder}/>
         </div>
       </div>
