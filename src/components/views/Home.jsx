@@ -44,24 +44,23 @@ let convertSkyCodeToParameter = code => {
 
   switch (code) {
     case "SKY_A01":
-      result.cloudLevel = 1;
       return result;
     case "SKY_A02":
-      result.cloudLevel = 2;
+      result.cloudLevel = 1;
       return result;
     case "SKY_A03":
-      result.cloudLevel = 3;
+      result.cloudLevel = 2;
       return result;
     case "SKY_A04":
-      result.cloudLevel = 3;
+      result.cloudLevel = 2;
       result.isRain = true;
       return result;
     case "SKY_A05":
-      result.cloudLevel = 3;
+      result.cloudLevel = 2;
       result.isSnow = true;
       return result;
     case "SKY_A06":
-      result.cloudLevel = 3;
+      result.cloudLevel = 2;
       result.isRain = true;
       result.isSnow = true;
       return result;
@@ -211,7 +210,7 @@ class Home extends React.Component {
     let skyAttrs = convertSkyCodeToParameter(skyStatus);
 
     let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : ["북미, 일부 성과에도 입장차 확인…후속협상에 공 넘겨"];
-    
+
     let color = this.state.color;
     let background = `background linear-gradient(to bottom,rgb(${color.start.red}, ${color.start.green}, ${color.start.blue}) , rgb(${color.end.red}, ${color.end.green}, ${color.end.blue}))`;
 
@@ -238,8 +237,8 @@ class Home extends React.Component {
           </div>
         </div>
         <div className="background">
-          {<CloudLayer windSpeed={this.state.windSpeed}/>}
-          {/* <OvercastLayer windSpeed={this.state.windSpeed} /> */}
+          {<CloudLayer windSpeed={this.state.windSpeed} cloudType={skyAttrs.cloudLevel} />}
+          {skyAttrs.isOvercase && <OvercastLayer windSpeed={this.state.windSpeed} />}
           <RainLayer isRain={skyAttrs.isRain} isSnow={skyAttrs.isSnow} isThunder={skyAttrs.isThunder}/>
         </div>
       </div>

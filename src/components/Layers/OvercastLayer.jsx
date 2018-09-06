@@ -11,6 +11,9 @@ class OvercastLayer extends React.Component {
     this.amount = props.amount;
   }
 
+  componentDidMount() {
+  }
+
   render() {
     let width = window.innerWidth;
     let pixelDistancePerSec = this.props.windSpeed * 10;
