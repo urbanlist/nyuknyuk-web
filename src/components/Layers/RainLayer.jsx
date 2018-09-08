@@ -6,11 +6,11 @@ import './RainLayer.styl';
 
 const buildRain = () => {
   let margin = 80;
-  let height = 20;
+  let height = 18;
 
   let lines = [];
   for (let idx = 0; idx < 30; idx++) {
-    let line = (<line key={idx} x1="20" y1="0" x2="20" y2="100" stroke="rgb(255,255,255)" strokeWidth="1">
+    let line = (<line key={idx} x1="20" y1="0" x2="20" y2="100" stroke="rgba(255,255,255,0.4)" strokeWidth="1">
       <animate
         attributeName="y1"
         from={idx * margin - height}
@@ -32,9 +32,13 @@ const buildRain = () => {
 
 
 const buildSnow = () => {
-  let margin = 80;
-  let height = 20;
-  let half = 3;
+  let margin = 100;
+  let height = 12;
+  let startX = 10;
+  let maxWidth = 20;
+  let width = 16;
+  let degree = 1;
+  let diagonalMinus = 2;
 
   let snowes = [];
   for (let idx = 0; idx < 30; idx++) {
@@ -53,7 +57,7 @@ const buildSnow = () => {
           dur="3s"
           repeatCount="indefinite" />
       </line>
-      <line x1="10" y1="0" x2="30" y2="100" stroke="rgb(255,255,255)" strokeWidth="1">
+      <line x1={startX + maxWidth - width} y1="0" x2={startX + width} y2="100" stroke="rgb(255,255,255)" strokeWidth="1">
         <animate
           attributeName="y1"
           from={idx * margin - (height / 2)}
@@ -67,31 +71,31 @@ const buildSnow = () => {
           dur="3s"
           repeatCount="indefinite" />
       </line>
-      <line x1="13" y1="0" x2="26" y2="100" stroke="rgb(255,255,255)" strokeWidth="1">
+      <line x1="16" y1="0" x2="24" y2="100" stroke="rgb(255,255,255)" strokeWidth="1">
         <animate
           attributeName="y1"
-          from={idx * margin - (height / 2) - (half * 2)}
-          to={(idx + 1) * margin - (height / 2) - (half * 2)}
+          from={idx * margin - (height / 2) - (degree * 2) - diagonalMinus}
+          to={(idx + 1) * margin - (height / 2) - (degree * 2) - diagonalMinus}
           dur="3s"
           repeatCount="indefinite" />
         <animate
           attributeName="y2"
-          from={idx * margin - (height / 2) + (half * 2)}
-          to={(idx + 1) * margin - (height / 2) + (half * 2)}
+          from={idx * margin - (height / 2) + (degree * 2) + diagonalMinus}
+          to={(idx + 1) * margin - (height / 2) + (degree * 2) + diagonalMinus}
           dur="3s"
           repeatCount="indefinite" />
       </line>
-      <line x1="13" y1="0" x2="26" y2="100" stroke="rgb(255,255,255)" strokeWidth="1">
+      <line x1="16" y1="0" x2="24" y2="100" stroke="rgb(255,255,255)" strokeWidth="1">
         <animate
           attributeName="y1"
-          from={idx * margin - (height / 2) + (half * 2)}
-          to={(idx + 1) * margin - (height / 2) + (half * 2)}
+          from={idx * margin - (height / 2) + (degree * 2) + diagonalMinus}
+          to={(idx + 1) * margin - (height / 2) + (degree * 2) + diagonalMinus}
           dur="3s"
           repeatCount="indefinite" />
         <animate
           attributeName="y2"
-          from={idx * margin - (height / 2) - (half * 2)}
-          to={(idx + 1) * margin - (height / 2) - (half * 2)}
+          from={idx * margin - (height / 2) - (degree * 2) - diagonalMinus}
+          to={(idx + 1) * margin - (height / 2) - (degree * 2) - diagonalMinus}
           dur="3s"
           repeatCount="indefinite" />
       </line>
@@ -120,34 +124,36 @@ const buildThunder = () => {
 
 const buildElements = (count, isThunder, isRain, isSnow) => {
   let idx = 0;
+  let width = 50;
+
   let elements = new Array(Math.round(count)).fill(1).map(i => {
     if (isThunder) {
       if (isSnow & isRain) {
         let element = idx % 2 == 1 ? buildThunder().map(i => i) :
           idx % 4 == 0 ? buildRain().map(i => i) : buildSnow().map(i => i);
         return (<div key={idx++} className="rain-element">
-          <svg width="50px" height="120%">
+          <svg width={width} height="120%">
             {element}
           </svg>
         </div>)
       } else if (isSnow) {
         let element = idx % 2 == 1 ? buildThunder().map(i => i) : buildSnow().map(i => i);
         return (<div key={idx++} className="rain-element">
-          <svg width="50px" height="120%">
+          <svg width={width} height="120%">
             {element}
           </svg>
         </div>)
       } else if (isRain) {
         let element = idx % 2 == 1 ? buildThunder().map(i => i) : buildRain().map(i => i);
         return (<div key={idx++} className="rain-element">
-          <svg width="50px" height="120%">
+          <svg width={width} height="120%">
             {element}
           </svg>
         </div>)
       } else {
         let element = idx % 2 == 1 ? buildThunder().map(i => i) : null;
         return (<div key={idx++} className="rain-element">
-          <svg width="50px" height="120%">
+          <svg width={width} height="120%">
             {element}
           </svg>
         </div>)
@@ -156,21 +162,21 @@ const buildElements = (count, isThunder, isRain, isSnow) => {
       if (isSnow & isRain) {
         let element = idx % 2 == 0 ? buildSnow().map(i => i) : buildRain().map(i => i);
         return (<div key={idx++} className="rain-element">
-          <svg width="50px" height="120%">
+          <svg width={width} height="120%">
             {element}
           </svg>
         </div>)
       } else if (isSnow) {
         let element = buildSnow().map(i => i);
         return (<div key={idx++} className="rain-element">
-          <svg width="50px" height="120%">
+          <svg width={width} height="120%">
             {element}
           </svg>
         </div>)
       } else if (isRain) {
         let element = buildRain().map(i => i);
         return (<div key={idx++} className="rain-element">
-          <svg width="50px" height="120%">
+          <svg width={width} height="120%">
             {element}
           </svg>
         </div>)
