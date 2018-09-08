@@ -131,28 +131,28 @@ const buildElements = (count, isThunder, isRain, isSnow) => {
       if (isSnow & isRain) {
         let element = idx % 2 == 1 ? buildThunder().map(i => i) :
           idx % 4 == 0 ? buildRain().map(i => i) : buildSnow().map(i => i);
-        return (<div key={idx++} className="rain-element">
+        return (<div key={idx++} className="thunder-element">
           <svg width={width} height="120%">
             {element}
           </svg>
         </div>)
       } else if (isSnow) {
         let element = idx % 2 == 1 ? buildThunder().map(i => i) : buildSnow().map(i => i);
-        return (<div key={idx++} className="rain-element">
+        return (<div key={idx++} className="thunder-element">
           <svg width={width} height="120%">
             {element}
           </svg>
         </div>)
       } else if (isRain) {
         let element = idx % 2 == 1 ? buildThunder().map(i => i) : buildRain().map(i => i);
-        return (<div key={idx++} className="rain-element">
+        return (<div key={idx++} className="thunder-element">
           <svg width={width} height="120%">
             {element}
           </svg>
         </div>)
       } else {
         let element = idx % 2 == 1 ? buildThunder().map(i => i) : null;
-        return (<div key={idx++} className="rain-element">
+        return (<div key={idx++} className="thunder-element">
           <svg width={width} height="120%">
             {element}
           </svg>
@@ -161,14 +161,14 @@ const buildElements = (count, isThunder, isRain, isSnow) => {
     } else {
       if (isSnow & isRain) {
         let element = idx % 2 == 0 ? buildSnow().map(i => i) : buildRain().map(i => i);
-        return (<div key={idx++} className="rain-element">
+        return (<div key={idx++} className="snow-rain-element">
           <svg width={width} height="120%">
             {element}
           </svg>
         </div>)
       } else if (isSnow) {
         let element = buildSnow().map(i => i);
-        return (<div key={idx++} className="rain-element">
+        return (<div key={idx++} className="snow-element">
           <svg width={width} height="120%">
             {element}
           </svg>
