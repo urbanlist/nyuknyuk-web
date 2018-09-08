@@ -35,6 +35,7 @@ let convertSkyCodeToName = code => {
 
 let convertSkyCodeToParameter = code => {
   let result = {
+    isDefault: false,
     isSnow: false,
     isRain: false,
     isThunder: false,
@@ -44,6 +45,7 @@ let convertSkyCodeToParameter = code => {
 
   switch (code) {
     case "SKY_A01":
+      result.isDefault = true;
       return result;
     case "SKY_A02":
       result.cloudLevel = 1;
@@ -212,12 +214,17 @@ class Home extends React.Component {
     let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : ["북미, 일부 성과에도 입장차 확인…후속협상에 공 넘겨"];
 
     let color = this.state.color;
-    let background = `background linear-gradient(to bottom,rgb(${color.start.red}, ${color.start.green}, ${color.start.blue}) , rgb(${color.end.red}, ${color.end.green}, ${color.end.blue}))`;
+    let background = `linear-gradient(to bottom,rgb(${color.start.red}, ${color.start.green}, ${color.start.blue}) , rgb(${color.end.red}, ${color.end.green}, ${color.end.blue}))`;
+    // let background = "linear-gradient(to bottom, rgb(96, 111, 163) , rgb(185, 195, 222))";
+    let clarity = () => {
+      return (<div className="clarity"> </div>)
+    }
 
     return (
       <div className="home" style={{
         "background": background
       }}>
+        {skyAttrs.isDefault && clarity()}
         <div className="top">
           <div className="weather">
             {convertSkyCodeToName(this.state.skyStatus) + ", " + this.state.temperature + "°C"}
