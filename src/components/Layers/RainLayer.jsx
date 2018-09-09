@@ -107,14 +107,89 @@ const buildSnow = () => {
 }
 
 
+const buildValues = (from, to, count, position) => {
+  let property = [];
+  for (let idx = 0; idx <= count; idx++) {
+    if (idx <= position) {
+      property.push(from);
+    } else {
+      property.push(to);
+    }
+  }
+  return property;
+}
+
+
+const buildKeyTimes = (count, position) => {
+  let property = [];
+  for (let idx = 0; idx <= count; idx++) {
+    property.push(idx / count);
+  }
+  return property;
+}
+
+
 const buildThunder = () => {
   let startX = 2;
   let width = 40;
   let elementHeight = 80;
+  let count = 20;
+  let delay = 20;
 
   let lines = [];
-  for (let idx = 0; idx < 20; idx++) {
-    let line = (<line key={idx} x1={idx % 2 == 0 ? startX : startX + width} y1={idx * elementHeight - idx} x2={idx % 2 == 1 ? startX : startX + width} y2={(idx + 1) * elementHeight - idx} stroke="rgb(255,255,255)" strokeWidth="2"></line>)
+  let time = "4s";
+  for (let idx = 0; idx < count; idx++) {
+    let x1 = idx % 2 == 0 ? startX : startX + width;
+    let x2 = idx % 2 == 1 ? startX : startX + width;
+    let y1 = idx * elementHeight - idx;
+    let y2 = (idx + 1) * elementHeight - idx;
+
+    let valuesX2 = buildValues(x1, x2, count, idx).concat(Array(delay + count).fill(x2)).join(";");
+    let valuesY2 = buildValues(y1, y2, count, idx).concat(Array(delay + count).fill(y2)).join(";");
+    let keyTimesX2 = buildKeyTimes(count + delay + count, idx).join(";");
+    let keyTimesY2 = buildKeyTimes(count + delay + count, idx).join(";");
+    
+    let valuesX1 = Array(delay + count).fill(x1).concat(buildValues(x1, x2, count, idx)).join(";");
+    let valuesY1 = Array(delay + count).fill(y1).concat(buildValues(y1, y2, count, idx)).join(";");
+    let keyTimesX1 = buildKeyTimes(count + delay + count, idx).join(";");
+    let keyTimesY1 = buildKeyTimes(count + delay + count, idx).join(";");
+
+    let line = (<line key={idx}
+      x1={x1}
+      y1={y1}
+      x2={x2}
+      y2={y2}
+      stroke="rgb(255,255,255)"
+      strokeWidth="2">
+      <animate
+        attributeName="x2"
+        begin={`${0}s`}
+        values={valuesX2}
+        keyTimes={keyTimesX2}
+        dur={time}
+        repeatCount="indefinite" />
+      <animate
+        attributeName="y2"
+        begin={`${0}s`}
+        values={valuesY2}
+        keyTimes={keyTimesY2}
+        dur={time}
+        repeatCount="indefinite" />
+      <animate
+        attributeName="x1"
+        begin={`${0}s`}
+        values={valuesX1}
+        keyTimes={keyTimesX1}
+        dur={time}
+        repeatCount="indefinite" />
+      <animate
+        attributeName="y1"
+        begin={`${0}s`}
+        values={valuesY1}
+        keyTimes={keyTimesY1}
+        dur={time}
+        repeatCount="indefinite" />
+    </line>)
     lines.push(line);
   }
 
