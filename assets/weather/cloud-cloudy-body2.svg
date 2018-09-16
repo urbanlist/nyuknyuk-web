@@ -8,11 +8,11 @@
 <title>cloud-cloudy body</title>
 <g id="레이어_2_1_">
 	
-		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="90.5" y1="171.7539" x2="90.5" y2="38.3073" gradientTransform="matrix(1 0 0 -1 0 202)">
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-479.5" y1="171.86" x2="-479.5" y2="38.33" gradientTransform="matrix(-1 0 0 1 -389 -2)">
 		<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0"/>
 		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0.3"/>
 	</linearGradient>
-	<path class="st0" d="M181,57.5C157.5,7.6,97.9-13.9,48,9.6c-21.1,9.9-38,26.9-48,47.9v85.1c23.5,50,83.1,71.4,133,47.9
-		c21.1-9.9,38-26.9,48-47.9V57.5z"/>
+	<path class="st0" d="M0,142.6c23.5,50,83.1,71.5,133,48c21.1-9.9,38-26.9,48-48V57.4C157.5,7.4,97.9-14,48,9.5
+		c-21.1,9.9-38,26.9-48,48V142.6z"/>
 </g>
 </svg>
