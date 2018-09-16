@@ -137,7 +137,7 @@ const buildThunder = () => {
   let delay = 20;
 
   let lines = [];
-  let time = "4s";
+  let time = "5s";
   for (let idx = 0; idx < count; idx++) {
     let x1 = idx % 2 == 0 ? startX : startX + width;
     let x2 = idx % 2 == 1 ? startX : startX + width;
@@ -159,7 +159,7 @@ const buildThunder = () => {
       y1={y1}
       x2={x2}
       y2={y2}
-      stroke="rgb(255,255,255)"
+      stroke="rgb(180,180,180)"
       strokeWidth="2">
       <animate
         attributeName="x2"
