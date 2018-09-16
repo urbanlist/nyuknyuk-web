@@ -6,6 +6,7 @@ import WeatherController from '../modules/WeatherController.js';
 import NewsController from '../modules/NewsController.js';
 import Timer from '../modules/Timer.js';
 import CloudLayer from '../Layers/CloudLayer.jsx';
+import Cloud2Layer from '../Layers/Cloud2Layer.jsx';
 import OvercastLayer from '../Layers/OvercastLayer.jsx';
 import RainLayer from '../Layers/RainLayer.jsx';
 import './Home.styl';
@@ -197,9 +198,11 @@ class Home extends React.Component {
     let year = date.getFullYear();
     let hour = date.getHours();
     let min = date.getMinutes();
+    let hourFormat = ("0" + hour).slice(-2); 
+    let minFormat = ("0" + min).slice(-2);
 
     this.setState({
-      date: hour + ':' + min + ' ' + day + ', ' + convertMonthToName(month) + ', ' + year
+      date: `${year}. ${month}. ${day}. ${hourFormat}:${minFormat}`
     });
   }
 
@@ -220,21 +223,25 @@ class Home extends React.Component {
       return (<div className="clarity"> </div>)
     }
 
+    let fontStyle = {
+      "color": (color.start.red + color.start.green + color.start.blue) / 3 < 140 ? "#fff" : "#000"
+    };
+
     return (
       <div className="home" style={{
         "background": background
       }}>
         {skyAttrs.isDefault && clarity()}
-        <div className="top">
+        <div className="top" style={fontStyle}>
           <div className="weather">
             {convertSkyCodeToName(this.state.skyStatus) + ", " + this.state.temperature + "°C"}
           </div>
           <div className="place">
-            {"SEOUL"}
+            {"YONGIN"}
           </div>
         </div>
-        <div className="center">
-          <div>
+        <div className="center" style={fontStyle}>
+          <div className="text">
             <div className="datetime">
               {this.state.date}
             </div>
@@ -245,7 +252,8 @@ class Home extends React.Component {
         </div>
         <div className="background">
           {<CloudLayer windSpeed={this.state.windSpeed} cloudType={skyAttrs.cloudLevel} />}
-          {skyAttrs.isOvercase && <OvercastLayer windSpeed={this.state.windSpeed} />}
+          {skyAttrs.cloudLevel == 2 && <Cloud2Layer />}
+          {skyAttrs.isOvercase && <OvercastLayer windSpeed={this.state.windSpeed}/>}
           <RainLayer isRain={skyAttrs.isRain} isSnow={skyAttrs.isSnow} isThunder={skyAttrs.isThunder}/>
         </div>
       </div>

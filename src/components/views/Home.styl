@@ -21,34 +21,36 @@
     display flex
     justify-content space-between
     .weather
+      z-index 10
       position relative
       top 20px
       left 20px
       font-size 1.5rem
       font-weight 100
-      color #ffffff
     .place
+      z-index 10
       position relative
       top 20px
       right 20px
       font-size 1.5rem
       font-weight 100
-      color #ffffff
   .center
     height 100%
     display flex
     align-items center
     justify-content center
+    margin-top -20px
+    .text
+      z-index 10
     .datetime
+      font-family "Roboto script=all rev=1", "Adobe Blank"
+      font-weight 100
       text-align center
       font-size 1rem
-      color #ffffff
       margin-bottom 1rem
     .content
-      background-color rgba(255,255,255,0.3)
       text-align center
       font-size 1.5rem
-      color #000000
       margin-left 2rem
       margin-right 2rem
       line-height 2rem

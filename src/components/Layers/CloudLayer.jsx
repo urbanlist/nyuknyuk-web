@@ -17,7 +17,8 @@ class CloudLayer extends React.Component {
 
   render() {
     let cloudType = this.props.cloudType;
-    let seconds = ConvertWindSpeedToPixel(this.props.windSpeed);
+    // let seconds = ConvertWindSpeedToPixel(this.props.windSpeed);
+    let seconds = "3";
 
     let cloudClass = classnames({
       "cloud": true,
@@ -25,21 +26,13 @@ class CloudLayer extends React.Component {
       "cloud-type-2": cloudType == 2,
     });
 
+    if (cloudType == 2) {
+      return (<div></div>);
+    }
+
     // todo: size에 따라 속도를 다르게 주어야함
     return (
       <div className="cloud-layer">
-        <div className={cloudClass} style={{
-          "animation": `cloud ${seconds + Random(-3,7)}s ${Random(0, seconds)/3}s infinite linear`
-        }}></div>
-        <div className={cloudClass} style={{
-          "animation": `cloud ${seconds + Random(-3,7)}s ${Random(0, seconds)/3}s infinite linear`
-        }}></div>
-        <div className={cloudClass} style={{
-          "animation": `cloud ${seconds + Random(-3,7)}s ${Random(0, seconds)/3}s infinite linear`
-        }}></div>
-        <div className={cloudClass} style={{
-          "animation": `cloud ${seconds + Random(-3,7)}s ${Random(0, seconds)/3}s infinite linear`
-        }}></div>
         <div className={cloudClass} style={{
           "animation": `cloud ${seconds + Random(-3,7)}s ${Random(0, seconds)/3}s infinite linear`
         }}></div>

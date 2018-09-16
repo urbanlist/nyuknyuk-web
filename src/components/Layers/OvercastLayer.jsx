@@ -1,7 +1,6 @@
 import React from 'react';
 import ConvertWindSpeedToPixel from '../modules/WindSpeed.js';
 import './OvercastLayer.styl';
-import OvercastImage from '../../../assets/weather/cloud-body.svg';
 
 
 class OvercastLayer extends React.Component {
