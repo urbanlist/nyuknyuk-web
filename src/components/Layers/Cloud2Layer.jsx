@@ -1,34 +1,29 @@
 import React from 'react';
-import ConvertWindSpeedToPixel from '../modules/WindSpeed.js';
 import './Cloud2Layer.styl';
 
 
 class Cloud2Layer extends React.Component {
   constructor(props) {
     super(props);
-
-    this.amount = props.amount;
-  }
-
-  componentDidMount() {
   }
 
   render() {
-    let width = window.innerWidth;
-    let pixelDistancePerSec = this.props.windSpeed * 10;
-    // let seconds = ConvertWindSpeedToPixel(this.props.windSpeed);
     let seconds = 15;
+
+    let overcastCount = Math.floor(
+      window.innerHeight/360
+    ) + 1;
+    let overcasts = new Array(overcastCount).fill(1).map((_, i) => {
+      return (<div key={i} className="cloud2layer-item" style={{
+        "animation": `overcast ${seconds}s linear infinite`
+      }}></div>);
+    });
 
     return (
       <div className="cloud2layer-layer">
-        <div className="cloud2layer-item" style={{
-          "animation": `cloud2layer ${seconds}s linear infinite`
-        }}></div>
-        <div className="cloud2layer-item" style={{
-          "animation": `cloud2layer ${seconds}s linear infinite`
-        }}></div>
+        {overcasts}
       </div>
-    )
+    );
   }
 }
 
