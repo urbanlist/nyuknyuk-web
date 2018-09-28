@@ -1,44 +1,55 @@
 import React from 'react';
-import ConvertWindSpeedToPixel from '../modules/WindSpeed.js';
-import classnames from 'classnames';
-import Random from '../modules/Random.js';
+import Timer from '../modules/Timer.js';
+import Cloud from '../controls/Cloud.jsx';
 import './CloudLayer.styl';
 
 
 class CloudLayer extends React.Component {
   constructor(props) {
     super(props);
+    
+    let timerTicks = (window.innerWidth / 20) * 1000 / 3;
+    this.timer = new Timer(this.buildCloud.bind(this), timerTicks);
+    this.state = {
+      cloudKeys: []
+    };
+    this.cloudId = 0;
+  }
 
-    this.amount = props.amount;
+  buildCloud() {
+    let cloudKeys = this.state.cloudKeys;
+
+    cloudKeys.push(this.cloudId);
+    if (cloudKeys.length >= 10) {
+      cloudKeys.shift();
+    }
+    this.setState({
+      cloudKeys: cloudKeys
+    });
+    this.cloudId += 1;
   }
 
   componentDidMount() {
+    this.timer.start();
+  }
+
+  componentWillUnmount() {
+    this.timer.stop();
   }
 
   render() {
     let cloudType = this.props.cloudType;
-    // let seconds = ConvertWindSpeedToPixel(this.props.windSpeed);
-    let seconds = "3";
-
-    let cloudClass = classnames({
-      "cloud": true,
-      "cloud-type-1": cloudType == 1,
-      "cloud-type-2": cloudType == 2,
-    });
-
-    if (cloudType == 2) {
+    if (cloudType != 1) {
       return (<div></div>);
     }
 
-    // todo: size에 따라 속도를 다르게 주어야함
+    let cloudSpeed = window.innerWidth / 20;
+
     return (
       <div className="cloud-layer">
-        <div className={cloudClass} style={{
-          "animation": `cloud ${seconds + Random(-3,7)}s ${Random(0, seconds)/3}s infinite linear`
-        }}></div>
-        <div className={cloudClass} style={{
-          "animation": `cloud ${seconds + Random(-3,7)}s ${Random(0, seconds)/3}s infinite linear`
-        }}></div>
+        {
+          this.state.cloudKeys.map(key => <Cloud key={key} viewTime={cloudSpeed} type={1}/>)
+        }
       </div>
     )
   }
