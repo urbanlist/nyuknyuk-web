@@ -161,6 +161,7 @@ class Home extends React.Component {
     this.newsController = new NewsController();
     this.weatherTimer = new Timer(this.setWeather.bind(this), 60 * 1000);
     this.clockTimer = new Timer(this.setClock.bind(this), 60 * 1000);
+    this.backgroundToggle = false;
   }
 
   componentDidMount() {
@@ -219,6 +220,7 @@ class Home extends React.Component {
     let color = this.state.color;
     let background = `linear-gradient(to bottom,rgb(${color.start.red}, ${color.start.green}, ${color.start.blue}) , rgb(${color.end.red}, ${color.end.green}, ${color.end.blue}))`;
     // let background = "linear-gradient(to bottom, rgb(96, 111, 163) , rgb(185, 195, 222))";
+    this.backgroundToggle = !this.backgroundToggle;
     let clarity = () => {
       return (<div className="clarity"> </div>)
     }
@@ -228,9 +230,15 @@ class Home extends React.Component {
     };
 
     return (
-      <div className="home" style={{
-        "backgroundImage": background
-      }}>
+      <div className="home" >
+        <div className="sky-color" style={{
+          "backgroundImage": background,
+          "opacity": this.backgroundToggle ? 0 : 1
+        }}></div>
+        <div className="sky-color" style={{
+          "backgroundImage": background,
+          "opacity": this.backgroundToggle ? 1 : 0
+        }}></div>
         {skyAttrs.isDefault && clarity()}
         <div className="top" style={fontStyle}>
           <div className="weather">
