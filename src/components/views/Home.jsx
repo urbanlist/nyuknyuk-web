@@ -30,7 +30,11 @@ let convertSkyCodeToName = code => {
     "SKY_A14": "뇌우/비 또는 눈",
     "none": "알 수 없음"
   }
-  return dic[code];
+  if (dic.hasOwnProperty(code)) {
+    return dic[code];
+  } else {
+    return "";
+  }
 }
 
 
