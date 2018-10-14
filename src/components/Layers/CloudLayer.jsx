@@ -1,6 +1,7 @@
 import React from 'react';
 import Timer from '../modules/Timer.js';
 import Cloud from '../controls/Cloud.jsx';
+import Random from '../modules/Random.js';
 import './CloudLayer.styl';
 
 
@@ -17,14 +18,26 @@ class CloudLayer extends React.Component {
   }
 
   buildCloud() {
-    let cloudKeys = this.state.cloudKeys;
+    let cloudTuple = this.state.cloudKeys;
 
-    cloudKeys.push(this.cloudId);
-    if (cloudKeys.length >= 10) {
-      cloudKeys.shift();
+    let height = Random(0, 50) - 10;
+    if (cloudTuple.length > 0) {
+      let lastedCloudHeight = cloudTuple[cloudTuple.length-1][1];
+      while (lastedCloudHeight + 10 > height &&
+             lastedCloudHeight - 10 < height) {
+        height = Random(0, 50) - 20;
+      }
+    }
+
+    cloudTuple.push(
+      [this.cloudId, height]
+    );
+
+    if (cloudTuple.length >= 10) {
+      cloudTuple.shift();
     }
     this.setState({
-      cloudKeys: cloudKeys
+      cloudTuple: cloudTuple
     });
     this.cloudId += 1;
   }
@@ -48,7 +61,11 @@ class CloudLayer extends React.Component {
     return (
       <div className="cloud-layer">
         {
-          this.state.cloudKeys.map(key => <Cloud key={key} viewTime={cloudSpeed} type={1}/>)
+          this.state.cloudKeys.map(tuple => <Cloud 
+            key={tuple[0]}
+            height={tuple[1]}
+            viewTime={cloudSpeed} 
+            type={1}/>)
         }
       </div>
     )

@@ -10,7 +10,8 @@ class Cloud extends React.Component {
     super(props);
 
     this.movement = Random(0, 20) - 40;
-    this.height = Random(0, 50) - 20;
+    // this.height = Random(0, 50) - 20;
+    this.height = props.height;
 
     this.viewTime = props.viewTime;
 
