@@ -258,11 +258,30 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
-        <div className="background">
-          {<CloudLayer windSpeed={this.state.windSpeed} cloudType={skyAttrs.cloudLevel} />}
-          {skyAttrs.cloudLevel == 2 && <Cloud2Layer />}
-          {skyAttrs.isOvercase && <OvercastLayer windSpeed={this.state.windSpeed}/>}
-          <RainLayer isRain={skyAttrs.isRain} isSnow={skyAttrs.isSnow} isThunder={skyAttrs.isThunder}/>
+        <div className="sky">
+          <div style={{
+            opacity: skyAttrs.cloudLevel == 1 ? 1 : 0
+          }}>
+            <CloudLayer windSpeed={this.state.windSpeed} cloudType={skyAttrs.cloudLevel} />
+          </div>
+          <div style={{
+            opacity: skyAttrs.cloudLevel == 2 ? 1 : 0
+          }}>
+            <Cloud2Layer />
+          </div>
+          <div style={{
+            opacity: skyAttrs.isOvercase ? 1 : 0
+          }}>
+            <OvercastLayer windSpeed={this.state.windSpeed}/>
+          </div>
+          <div style={{
+            opacity: skyAttrs.isRain || skyAttrs.isSnow || skyAttrs.isThunder ? 1 : 0
+          }}>
+            <RainLayer 
+              isRain={skyAttrs.isRain} 
+              isSnow={skyAttrs.isSnow} 
+              isThunder={skyAttrs.isThunder} />
+          </div>
         </div>
       </div>
     )
