@@ -229,7 +229,7 @@ class Home extends React.Component {
 
     return (
       <div className="home" style={{
-        "background": background
+        "backgroundImage": background
       }}>
         {skyAttrs.isDefault && clarity()}
         <div className="top" style={fontStyle}>
