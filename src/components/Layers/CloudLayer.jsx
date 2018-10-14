@@ -5,6 +5,11 @@ import Random from '../modules/Random.js';
 import './CloudLayer.styl';
 
 
+const buildCloudHeight = () => {
+  return Random(0, 35) - 15;
+}
+
+
 class CloudLayer extends React.Component {
   constructor(props) {
     super(props);
@@ -20,12 +25,12 @@ class CloudLayer extends React.Component {
   buildCloud() {
     let cloudTuple = this.state.cloudKeys;
 
-    let height = Random(0, 50) - 10;
+    let height = buildCloudHeight();
     if (cloudTuple.length > 0) {
       let lastedCloudHeight = cloudTuple[cloudTuple.length-1][1];
       while (lastedCloudHeight + 10 > height &&
              lastedCloudHeight - 10 < height) {
-        height = Random(0, 50) - 20;
+        height = buildCloudHeight();
       }
     }
 
