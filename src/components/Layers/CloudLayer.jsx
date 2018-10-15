@@ -6,7 +6,7 @@ import './CloudLayer.styl';
 
 
 const buildCloudHeight = () => {
-  return Random(0, 35) - 15;
+  return Random(0, 35) - 13;
 }
 
 
@@ -28,8 +28,8 @@ class CloudLayer extends React.Component {
     let height = buildCloudHeight();
     if (cloudTuple.length > 0) {
       let lastedCloudHeight = cloudTuple[cloudTuple.length-1][1];
-      while (lastedCloudHeight + 10 > height &&
-             lastedCloudHeight - 10 < height) {
+      while (lastedCloudHeight + 15 > height &&
+             lastedCloudHeight - 15 < height) {
         height = buildCloudHeight();
       }
     }
