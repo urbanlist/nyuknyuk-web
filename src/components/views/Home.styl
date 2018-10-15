@@ -22,6 +22,8 @@
     animation clarity-animation 2s 1s infinite linear
     // opacity .1 
   .top
+    position fixed
+    width 100%
     display flex
     justify-content space-between
     .weather
@@ -29,15 +31,17 @@
       position relative
       top 20px
       left 20px
-      font-size 1.5rem
-      font-weight 100
+      font-family 'Lato', sans-serif
+      font-size 1rem
+      font-weight 700
     .place
       z-index 10
       position relative
       top 20px
       right 20px
-      font-size 1.5rem
-      font-weight 100
+      font-family 'Lato', sans-serif
+      font-size 1rem
+      font-weight 700
   .center
     height 100%
     display flex
@@ -47,7 +51,7 @@
     .text
       z-index 10
     .datetime
-      font-family 'Roboto', sans-serif
+      font-family 'Lato', sans-serif
       font-weight 100
       text-align center
       font-size 1rem
@@ -59,6 +63,24 @@
       margin-right 2rem
       line-height 2rem
       font-weight 100
+  .bottom
+    position fixed
+    height 100%
+    width 100%
+    .infomation
+      width 100%
+      position absolute
+      bottom 20px
+      svg
+        width 20px
+        height 20px
+        float right
+        position relative
+        right 20px
+        font-family 'Lato', sans-serif
+        font-size 1rem
+        font-weight 700
+        color white
   .sky
     position absolute
     height 100%

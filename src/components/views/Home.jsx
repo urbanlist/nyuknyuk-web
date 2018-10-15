@@ -165,7 +165,9 @@ class Home extends React.Component {
     this.newsController = new NewsController();
     this.weatherTimer = new Timer(this.setWeather.bind(this), 60 * 1000);
     this.clockTimer = new Timer(this.setClock.bind(this), 60 * 1000);
+    
     this.backgroundToggle = false;
+    this.lastBackground = null;
   }
 
   componentDidMount() {
@@ -222,9 +224,11 @@ class Home extends React.Component {
     let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : ["북미, 일부 성과에도 입장차 확인…후속협상에 공 넘겨"];
 
     let color = this.state.color;
-    let background = `linear-gradient(to bottom,rgb(${color.start.red}, ${color.start.green}, ${color.start.blue}) , rgb(${color.end.red}, ${color.end.green}, ${color.end.blue}))`;
-    // let background = "linear-gradient(to bottom, rgb(96, 111, 163) , rgb(185, 195, 222))";
+    let currentBackground = `linear-gradient(to bottom,rgb(${color.start.red}, ${color.start.green}, ${color.start.blue}) , rgb(${color.end.red}, ${color.end.green}, ${color.end.blue}))`;
+    let lastBackground = this.lastBackground;
+    this.lastBackground = currentBackground
     this.backgroundToggle = !this.backgroundToggle;
+
     let clarity = () => {
       return (<div className="clarity"> </div>)
     }
@@ -236,12 +240,14 @@ class Home extends React.Component {
     return (
       <div className="home" >
         <div className="sky-color" style={{
-          "backgroundImage": background,
-          "opacity": this.backgroundToggle ? 0 : 1
+          "backgroundImage": this.backgroundToggle ? lastBackground : currentBackground,
+          "opacity": this.backgroundToggle ? 0 : 1,
+          "transitionDelay": this.backgroundToggle ? "4s" : "0s"
         }}></div>
         <div className="sky-color" style={{
-          "backgroundImage": background,
-          "opacity": this.backgroundToggle ? 1 : 0
+          "backgroundImage": this.backgroundToggle ? currentBackground : lastBackground,
+          "opacity": this.backgroundToggle ? 1 : 0,
+          "transitionDelay": this.backgroundToggle ? "0s" : "4s"
         }}></div>
         {skyAttrs.isDefault && clarity()}
         <div className="top" style={fontStyle}>
@@ -250,6 +256,11 @@ class Home extends React.Component {
           </div>
           <div className="place">
             {"YONGIN"}
+          </div>
+        </div>
+        <div className="bottom">
+          <div className="infomation">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.5 59.93" style={{fill:"white"}}><title>자산 1</title><g id="레이어_2" data-name="레이어 2"><g id="레이어_1-2" data-name="레이어 1"><path d="M45.5,0H2A2,2,0,0,0,0,2V57.93a2,2,0,0,0,2,2H29l.36,0,.14,0,.23-.07.14-.08a1.06,1.06,0,0,0,.21-.11,1.42,1.42,0,0,0,.3-.25l16.5-16.5a1.87,1.87,0,0,0,.32-.42l.06-.12a2,2,0,0,0,.17-.48h0a1.58,1.58,0,0,0,0-.38V2A2,2,0,0,0,45.5,0ZM31,53.1V43.43h9.67ZM43.5,39.43H29a2,2,0,0,0-2,2v14.5H4V4H43.5Z"/><rect x="10.75" y="10.93" width="26" height="4"/><rect x="11" y="19.93" width="26" height="4"/><rect x="11" y="28.93" width="26" height="4"/></g></g></svg>
           </div>
         </div>
         <div className="center" style={fontStyle}>
