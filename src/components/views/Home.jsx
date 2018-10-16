@@ -245,9 +245,19 @@ class Home extends React.Component {
           "transitionDelay": "0s"
         }}></div>
         <div className="sky-color" style={{
+          "backgroundImage": this.backgroundToggle ? lastBackground : currentBackground,
+          "opacity": this.backgroundToggle ? 0 : 1,
+          "transitionDelay": "2s"
+        }}></div>
+        <div className="sky-color" style={{
           "backgroundImage": this.backgroundToggle ? currentBackground : lastBackground,
           "opacity": this.backgroundToggle ? 1 : 0,
           "transitionDelay": "0s"
+        }}></div>
+        <div className="sky-color" style={{
+          "backgroundImage": this.backgroundToggle ? currentBackground : lastBackground,
+          "opacity": this.backgroundToggle ? 1 : 0,
+          "transitionDelay": "2s"
         }}></div>
         {skyAttrs.isDefault && clarity()}
         <div className="top" style={fontStyle}>
