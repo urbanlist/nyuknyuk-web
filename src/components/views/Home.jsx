@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import getURLParam from 'get-url-param';
 import cloud from '../../../assets/weather/cloud.svg';
 import Random from '../modules/Random.js';
@@ -9,6 +9,7 @@ import CloudLayer from '../Layers/CloudLayer.jsx';
 import Cloud2Layer from '../Layers/Cloud2Layer.jsx';
 import OvercastLayer from '../Layers/OvercastLayer.jsx';
 import RainLayer from '../Layers/RainLayer.jsx';
+import SkyColorLayer from '../Layers/SkyColorLayer.jsx';
 import './Home.styl';
 
 
@@ -168,6 +169,26 @@ class Home extends React.Component {
     
     this.backgroundToggle = false;
     this.lastBackground = null;
+
+    // 배경 테스트용 값
+    // let toggle = true;
+    // window.setInterval(() => {
+    //   toggle = !toggle;
+    //   this.setState({
+    //     color: {
+    //       start: {
+    //         red: toggle ? 0 : 255,
+    //         green: 0,
+    //         blue: 0
+    //       },
+    //       end: {
+    //         red: 0,
+    //         green: toggle ? 255 : 0,
+    //         blue: 0
+    //       }
+    //     }
+    //   });
+    // }, 8000);
   }
 
   componentDidMount() {
@@ -224,10 +245,6 @@ class Home extends React.Component {
     let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : ["북미, 일부 성과에도 입장차 확인…후속협상에 공 넘겨"];
 
     let color = this.state.color;
-    let currentBackground = `linear-gradient(to bottom,rgb(${color.start.red}, ${color.start.green}, ${color.start.blue}) , rgb(${color.end.red}, ${color.end.green}, ${color.end.blue}))`;
-    let lastBackground = this.lastBackground;
-    this.lastBackground = currentBackground
-    this.backgroundToggle = !this.backgroundToggle;
 
     let clarity = () => {
       return (<div className="clarity"> </div>)
@@ -239,26 +256,7 @@ class Home extends React.Component {
 
     return (
       <div className="home" >
-        <div className="sky-color" style={{
-          "backgroundImage": this.backgroundToggle ? lastBackground : currentBackground,
-          "opacity": this.backgroundToggle ? 0 : 1,
-          "transitionDelay": "0s"
-        }}></div>
-        <div className="sky-color" style={{
-          "backgroundImage": this.backgroundToggle ? lastBackground : currentBackground,
-          "opacity": this.backgroundToggle ? 0 : 1,
-          "transitionDelay": "2s"
-        }}></div>
-        <div className="sky-color" style={{
-          "backgroundImage": this.backgroundToggle ? currentBackground : lastBackground,
-          "opacity": this.backgroundToggle ? 1 : 0,
-          "transitionDelay": "0s"
-        }}></div>
-        <div className="sky-color" style={{
-          "backgroundImage": this.backgroundToggle ? currentBackground : lastBackground,
-          "opacity": this.backgroundToggle ? 1 : 0,
-          "transitionDelay": "2s"
-        }}></div>
+        <SkyColorLayer color={color}/>
         {skyAttrs.isDefault && clarity()}
         <div className="top" style={fontStyle}>
           <div className="weather">
