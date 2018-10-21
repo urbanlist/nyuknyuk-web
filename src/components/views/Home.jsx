@@ -10,6 +10,7 @@ import Cloud2Layer from '../Layers/Cloud2Layer.jsx';
 import OvercastLayer from '../Layers/OvercastLayer.jsx';
 import RainLayer from '../Layers/RainLayer.jsx';
 import SkyColorLayer from '../Layers/SkyColorLayer.jsx';
+import TextTypingControl from '../controls/TextTypingControl.jsx';
 import './Home.styl';
 
 
@@ -35,6 +36,29 @@ let convertSkyCodeToName = code => {
     return dic[code];
   } else {
     return "";
+  }
+}
+
+const convertColorAsSkyStatus = (color, skyStatus) => {
+  if (skyStatus !== "SKY_A01" && skyStatus !== "SKY_A02" && skyStatus !== "SKY_A03") {
+    return color;
+  }
+
+  let startArg = (color.start.red + color.start.green + color.start.blue) / 3;
+  let endArg = (color.end.red + color.end.green + color.end.blue) / 3;
+  endArg = (startArg + endArg) / 2;
+
+  return {
+    start: {
+      red: startArg < 36 ? color.start.red : startArg-36,
+      green: startArg < 6 ? color.start.green : startArg-6,
+      blue: startArg < 41 ? startArg+20 : startArg+41
+    },
+    end: {
+      red: endArg < 36 ? color.end.red : endArg-36,
+      green: endArg < 6 ? color.end.green : endArg-6,
+      blue: endArg < 41 ? startArg+20 : endArg+41
+    }
   }
 }
 
@@ -244,7 +268,9 @@ class Home extends React.Component {
 
     let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : ["북미, 일부 성과에도 입장차 확인…후속협상에 공 넘겨"];
 
-    let color = this.state.color;
+    let color = convertColorAsSkyStatus(this.state.color, skyStatus);
+    console.log(skyStatus);
+    console.log(color);
 
     let clarity = () => {
       return (<div className="clarity"> </div>)
@@ -277,7 +303,7 @@ class Home extends React.Component {
               {this.state.date}
             </div>
             <div className="content">
-              {newsArticles[0].title}
+              {newsArticles[0].title && <TextTypingControl text={newsArticles[0].title} speed={80}/>}
             </div>
           </div>
         </div>
