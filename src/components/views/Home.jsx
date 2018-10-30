@@ -15,7 +15,7 @@ import TextTypingControl from '../controls/TextTypingControl.jsx';
 import './Home.styl';
 
 
-let convertSkyCodeToName = code => {
+const convertSkyCodeToName = code => {
   let dic = {
     "SKY_A01": "맑음",
     "SKY_A02": "구름 조금",
@@ -65,7 +65,7 @@ const convertColorAsSkyStatus = (color, skyStatus) => {
 }
 
 
-let convertSkyCodeToParameter = code => {
+const convertSkyCodeToParameter = code => {
   let result = {
     isDefault: false,
     isSnow: false,
@@ -140,7 +140,7 @@ let convertSkyCodeToParameter = code => {
 }
 
 
-let convertMonthToName = month => {
+const convertMonthToName = month => {
   let dic = {
     1: "Jan",
     2: "Feb",
