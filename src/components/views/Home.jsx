@@ -12,6 +12,7 @@ import RainLayer from '../Layers/RainLayer.jsx';
 import SkyColorLayer from '../Layers/SkyColorLayer.jsx';
 import StarLayer from '../Layers/StarLayer.jsx';
 import TextTypingControl from '../controls/TextTypingControl.jsx';
+import LoadingLayer from '../Layers/LoadingLayer.jsx';
 import './Home.styl';
 
 
@@ -339,6 +340,7 @@ class Home extends React.Component {
             <StarLayer />
           </div>
         </div>
+        <LoadingLayer />
       </div>
     )
   }
