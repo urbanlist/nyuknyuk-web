@@ -10,6 +10,7 @@ import Cloud2Layer from '../Layers/Cloud2Layer.jsx';
 import OvercastLayer from '../Layers/OvercastLayer.jsx';
 import RainLayer from '../Layers/RainLayer.jsx';
 import SkyColorLayer from '../Layers/SkyColorLayer.jsx';
+import StarLayer from '../Layers/StarLayer.jsx';
 import TextTypingControl from '../controls/TextTypingControl.jsx';
 import './Home.styl';
 
@@ -58,7 +59,8 @@ const convertColorAsSkyStatus = (color, skyStatus) => {
       red: endArg < 36 ? color.end.red : endArg-36,
       green: endArg < 6 ? color.end.green : endArg-6,
       blue: endArg < 41 ? startArg+20 : endArg+41
-    }
+    },
+    isNight: startArg < 50
   }
 }
 
@@ -283,7 +285,7 @@ class Home extends React.Component {
     return (
       <div className="home" >
         <SkyColorLayer color={color}/>
-        {skyAttrs.isDefault && clarity()}
+        {skyAttrs.isDefault && color.isNight == false && clarity()}
         <div className="top" style={fontStyle}>
           <div className="weather">
             {convertSkyCodeToName(this.state.skyStatus) + ", " + this.state.temperature + "°C"}
@@ -330,6 +332,11 @@ class Home extends React.Component {
               isRain={skyAttrs.isRain} 
               isSnow={skyAttrs.isSnow} 
               isThunder={skyAttrs.isThunder} />
+          </div>
+          <div style={{
+            opacity: (this.state.skyStatus == "SKY_A01" || this.state.skyStatus == "SKY_A02") && (color.isNight == false)
+          }}>
+            <StarLayer />
           </div>
         </div>
       </div>
