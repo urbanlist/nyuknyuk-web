@@ -306,7 +306,7 @@ class Home extends React.Component {
               {this.state.date}
             </div>
             <div className="content">
-              {newsArticles[0].title && <TextTypingControl text={newsArticles[0].title} speed={80}/>}
+              {newsArticles[0].title}
             </div>
           </div>
         </div>
