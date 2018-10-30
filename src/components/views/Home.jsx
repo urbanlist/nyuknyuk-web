@@ -340,7 +340,7 @@ class Home extends React.Component {
             <StarLayer />
           </div>
         </div>
-        <LoadingLayer />
+        {PRODUCTION && <LoadingLayer />}
       </div>
     )
   }
