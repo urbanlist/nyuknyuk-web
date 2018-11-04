@@ -1,0 +1,41 @@
+.epilog-layer
+  top 0px
+  left 0px
+  position fixed
+  width 100%
+  height 100%
+  .container
+    height 100%
+    display flex
+    align-items center
+    justify-content center
+    @keyframes text-fade-in-ani
+      0%
+        opacity 0
+        transform translateY(0px)
+      100%
+        opacity 1
+        transform translateY(-10px)
+    @keyframes text-next-ani
+      0%
+        opacity 0
+      50%
+        opacity 1
+      100%
+        opacity 0
+    .story-line
+      .text
+        transform translateY(0vh)
+        color white // test
+        p
+          font-size 1rem
+          color white
+          text-align center
+          line-height 1.7rem
+        span.next
+          animation text-next-ani 2s 0s infinite
+      .text-fadein
+        for row in 1 2 3 4 5 6 7 8 9 10
+          p:nth-child({row})
+            opacity 0
+            animation text-fade-in-ani .7s row * .8s forwards

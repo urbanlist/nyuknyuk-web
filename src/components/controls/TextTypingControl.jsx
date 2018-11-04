@@ -12,17 +12,21 @@ class TextTypingControl extends React.Component {
     this.text = this.props.text;
     this.textLength = this.text.length;
     this.pointer = 0;
-    this.isLast = false;
+    this.isLast = this.props.isLast ? true : false;
 
     this.timer = new IntervalTimer(this.typing.bind(this), this.speed);
     this.state = {
-      text: ""
+      text: "",
+      isLast: false
     };
   }
 
   typing() {
     if (this.textLength <= this.pointer) {
       this.timer.stop();
+      this.setState({
+        isLast: this.isLast
+      });
       return;
     }
 
@@ -44,10 +48,10 @@ class TextTypingControl extends React.Component {
   }
 
   render() {
-    let last = this.isLast ? (<span class="continue">▪️</span>) : null;
+    let last = this.state.isLast ? (<span class="next">▪️</span>) : null;
     return (<div>
-      <span>{this.state.text}</span>
-      {last}
+      <p><span>{this.state.text}</span></p>
+      <p>{last}</p>
     </div>)
   }
 }
