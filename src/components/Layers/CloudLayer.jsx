@@ -23,13 +23,16 @@ class CloudLayer extends React.Component {
   }
 
   buildCloud() {
+    if (!this.props.isVisible)
+      return;
+
     let cloudTuple = this.state.cloudKeys;
 
     let height = buildCloudHeight();
     if (cloudTuple.length > 0) {
       let lastedCloudHeight = cloudTuple[cloudTuple.length-1][1];
-      while (lastedCloudHeight + 15 > height &&
-             lastedCloudHeight - 15 < height) {
+      while (lastedCloudHeight + 20 > height &&
+             lastedCloudHeight - 20 < height) {
         height = buildCloudHeight();
       }
     }
