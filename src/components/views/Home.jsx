@@ -47,20 +47,20 @@ const convertColorAsSkyStatus = (color, skyStatus) => {
     return color;
   }
 
-  let startArg = (color.start.red + color.start.green + color.start.blue) / 3;
-  let endArg = (color.end.red + color.end.green + color.end.blue) / 3;
-  endArg = (startArg + endArg) / 2;
+  let startArg = Math.floor((color.start.red + color.start.green + color.start.blue) / 3);
+  let endArg = Math.floor((color.end.red + color.end.green + color.end.blue) / 3);
+  endArg = Math.floor((startArg + endArg) / 2);
 
   return {
     start: {
-      red: startArg < 36 ? color.start.red : startArg-36,
-      green: startArg < 6 ? color.start.green : startArg-6,
-      blue: startArg < 41 ? startArg+20 : startArg+41
+      red: startArg < 36 ? color.start.red : startArg - 36,
+      green: startArg < 6 ? color.start.green : startArg - 6,
+      blue: startArg < 41 ? startArg + 20 : startArg + 41
     },
     end: {
-      red: endArg < 36 ? color.end.red : endArg-36,
-      green: endArg < 6 ? color.end.green : endArg-6,
-      blue: endArg < 41 ? startArg+20 : endArg+41
+      red: endArg < 36 ? color.end.red : endArg - 36,
+      green: endArg < 6 ? color.end.green : endArg - 6,
+      blue: endArg < 41 ? startArg + 20 : endArg + 41
     },
     isNight: startArg < 50
   }
@@ -201,13 +201,14 @@ class Home extends React.Component {
     this.newsController = new NewsController();
     this.weatherTimer = new Timer(this.setWeather.bind(this), 60 * 1000);
     this.clockTimer = new Timer(this.setClock.bind(this), 60 * 1000);
-    
+
     this.backgroundToggle = false;
     this.lastBackground = null;
 
     // 배경 테스트용 값
     // let toggle = true;
     // window.setInterval(() => {
+    //   console.log("change color");
     //   toggle = !toggle;
     //   this.setState({
     //     color: {
@@ -264,7 +265,7 @@ class Home extends React.Component {
     let year = date.getFullYear();
     let hour = date.getHours();
     let min = date.getMinutes();
-    let hourFormat = ("0" + hour).slice(-2); 
+    let hourFormat = ("0" + hour).slice(-2);
     let minFormat = ("0" + min).slice(-2);
 
     this.setState({
@@ -310,10 +311,10 @@ class Home extends React.Component {
     let fontColor = (color.start.red + color.start.green + color.start.blue) / 3 < 140 ? "#fff" : "#000";
 
     return (
-      <div className="home" >
-        <SkyColorLayer color={color}/>
+      <div className="home">
+        <SkyColorLayer color={color} />
         {skyAttrs.isDefault && color.isNight == false && clarity()}
-        {this.state.viewMode == ViewMode.News && <div className="top" style={{"color": fontColor}}>
+        {this.state.viewMode == ViewMode.News && <div className="top" style={{ "color": fontColor }}>
           <div className="weather">
             {convertSkyCodeToName(this.state.skyStatus) + ", " + this.state.temperature + "°C"}
           </div>
@@ -324,11 +325,11 @@ class Home extends React.Component {
         <div className="bottom">
           <div className="infomation">
             {this.state.viewMode == ViewMode.News && <button className="epilog-btn" onClick={e => this.viewEpilog()}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.5 59.93" style={{fill:fontColor}}><g id="레이어_2" data-name="레이어 2"><g id="레이어_1-2" data-name="레이어 1"><path d="M45.5,0H2A2,2,0,0,0,0,2V57.93a2,2,0,0,0,2,2H29l.36,0,.14,0,.23-.07.14-.08a1.06,1.06,0,0,0,.21-.11,1.42,1.42,0,0,0,.3-.25l16.5-16.5a1.87,1.87,0,0,0,.32-.42l.06-.12a2,2,0,0,0,.17-.48h0a1.58,1.58,0,0,0,0-.38V2A2,2,0,0,0,45.5,0ZM31,53.1V43.43h9.67ZM43.5,39.43H29a2,2,0,0,0-2,2v14.5H4V4H43.5Z"/><rect x="10.75" y="10.93" width="26" height="4"/><rect x="11" y="19.93" width="26" height="4"/><rect x="11" y="28.93" width="26" height="4"/></g></g></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.5 59.93" style={{ fill: fontColor }}><g id="레이어_2" data-name="레이어 2"><g id="레이어_1-2" data-name="레이어 1"><path d="M45.5,0H2A2,2,0,0,0,0,2V57.93a2,2,0,0,0,2,2H29l.36,0,.14,0,.23-.07.14-.08a1.06,1.06,0,0,0,.21-.11,1.42,1.42,0,0,0,.3-.25l16.5-16.5a1.87,1.87,0,0,0,.32-.42l.06-.12a2,2,0,0,0,.17-.48h0a1.58,1.58,0,0,0,0-.38V2A2,2,0,0,0,45.5,0ZM31,53.1V43.43h9.67ZM43.5,39.43H29a2,2,0,0,0-2,2v14.5H4V4H43.5Z" /><rect x="10.75" y="10.93" width="26" height="4" /><rect x="11" y="19.93" width="26" height="4" /><rect x="11" y="28.93" width="26" height="4" /></g></g></svg>
             </button>}
           </div>
         </div>
-        {this.state.viewMode == ViewMode.News && (<div className="center" style={{"color": fontColor}}>
+        {this.state.viewMode == ViewMode.News && (<div className="center" style={{ "color": fontColor }}>
           <div className="text">
             <div className="datetime">
               {this.state.date}
@@ -342,7 +343,7 @@ class Home extends React.Component {
           <div style={{
             opacity: skyAttrs.cloudLevel == 1 ? 1 : 0
           }}>
-            <CloudLayer windSpeed={this.state.windSpeed} cloudType={skyAttrs.cloudLevel} isVisible={skyAttrs.cloudLevel == 1}/>
+            <CloudLayer windSpeed={this.state.windSpeed} cloudType={skyAttrs.cloudLevel} isVisible={skyAttrs.cloudLevel == 1} />
           </div>
           <div style={{
             opacity: skyAttrs.cloudLevel == 2 ? 1 : 0
@@ -352,14 +353,14 @@ class Home extends React.Component {
           <div style={{
             opacity: skyAttrs.isOvercase ? 1 : 0
           }}>
-            <OvercastLayer windSpeed={this.state.windSpeed}/>
+            <OvercastLayer windSpeed={this.state.windSpeed} />
           </div>
           <div style={{
             opacity: skyAttrs.isRain || skyAttrs.isSnow || skyAttrs.isThunder ? 1 : 0
           }}>
-            <RainLayer 
-              isRain={skyAttrs.isRain} 
-              isSnow={skyAttrs.isSnow} 
+            <RainLayer
+              isRain={skyAttrs.isRain}
+              isSnow={skyAttrs.isSnow}
               isThunder={skyAttrs.isThunder} />
           </div>
           <div style={{
