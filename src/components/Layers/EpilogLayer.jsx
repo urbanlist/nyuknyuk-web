@@ -73,7 +73,7 @@ class EpilogLayer extends React.Component {
     let story = this.state.story;
 
     return (
-      <div className="epilog-layer" onClick={e => this.nextStory()}>
+      <div className="epilog-layer" onMouseDown={e => this.nextStory()} onTouchStart={e => this.nextStory()}>
         <div className="container">
           <div className="story-line">
             {story == 0 && <div className="text text-fadein">
