@@ -16,7 +16,7 @@ class StarLayer extends React.Component {
     );
 
     let starMarginHeight = starMargin / 3;
-    let starCount = Math.floor(window.innerWidth / starMarginHeight) / 2 + 1;
+    let starCount = Math.floor(Math.floor(window.innerWidth / starMarginHeight) / 2 + 1);
     let starItems1 = new Array(starCount).fill(1).map((_, i) => {
       return (
         <div key={i} className="star-item" style={{
