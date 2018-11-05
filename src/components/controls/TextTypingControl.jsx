@@ -48,7 +48,7 @@ class TextTypingControl extends React.Component {
   }
 
   render() {
-    let last = this.state.isLast ? (<span class="next">▪️</span>) : null;
+    let last = this.state.isLast ? (<span class="next">_</span>) : null;
     return (<div>
       <p><span>{this.state.text}</span></p>
       <p>{last}</p>
