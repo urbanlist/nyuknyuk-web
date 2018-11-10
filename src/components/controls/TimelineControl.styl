@@ -1,0 +1,67 @@
+$timelineBarWidth = 800px
+$timelineBarInnerWidth = calc(800px - 100px)
+$height = 30px
+
+.timeline-control
+  position relative
+  margin 0 auto
+  height 30px
+  color white
+  z-index 10
+  width 100%
+  display flex
+  .margin
+    width 20px
+  .left
+    z-index 10
+    height $height
+    width $height
+    border none
+    padding 0
+  .right
+    z-index 10
+    height $height
+    width $height
+    border none
+    padding 0
+  .timeline-bar-control
+    flex 1
+    margin 0 auto
+    width 75%
+    height $height
+    position relative
+    overflow hidden
+    .timeline-bar
+      height $height
+      transition transform .4s linear
+      display flex
+      width $timelineBarWidth
+      margin 0 auto
+      .start-bar
+        border-left 2px solid white
+        height $height
+      .middle-bar
+        position relative
+        width $timelineBarInnerWidth
+        flex none
+        .bar
+          width $timelineBarInnerWidth
+          position absolute
+          top 14px
+          border-top 2px solid white
+        .time-point-button
+          position absolute
+          height $height
+          width $height
+          border none
+          background none
+          padding 0
+          .time-point
+            background yellow
+            border-radius 10px
+            top 4px
+            width 20px
+            height 20px
+      .end-bar
+        border-left 2px solid white
+        height 30px
