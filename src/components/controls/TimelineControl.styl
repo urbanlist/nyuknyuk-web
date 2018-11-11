@@ -18,12 +18,16 @@ $height = 30px
     width $height
     border none
     padding 0
+    @media (min-width 1000px)
+      opacity 0
   .right
     z-index 10
     height $height
     width $height
     border none
     padding 0
+    @media (min-width 1000px)
+      opacity 0
   .timeline-bar-control
     flex 1
     margin 0 auto
@@ -33,7 +37,7 @@ $height = 30px
     overflow hidden
     .timeline-bar
       height $height
-      transition transform .4s linear
+      transition transform .3s linear
       display flex
       width $timelineBarWidth
       margin 0 auto
