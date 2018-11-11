@@ -203,7 +203,7 @@ class Home extends React.Component {
       },
       newsArticles: [],
       viewMode: ViewMode.News,
-      bottomViewMode: BottomViewMode.Main
+      bottomViewMode: BottomViewMode.Timeline
     };
 
     this.weatherController = new WeatherController();
@@ -312,6 +312,13 @@ class Home extends React.Component {
     });
   }
 
+  viewMain() {
+    this.setState({
+      viewMode: ViewMode.News,
+      bottomViewMode: BottomViewMode.Main
+    });
+  }
+
   onPointClick(data) {
     this.setState({
       viewMode: ViewMode.Timeline,
@@ -361,6 +368,12 @@ class Home extends React.Component {
           </div>}
           {this.state.bottomViewMode == BottomViewMode.Timeline && <div className="timeline">
             <TimelineControl onPointClick={e => this.onPointClick(e)}/>
+          </div>}
+          {this.state.bottomViewMode == BottomViewMode.Timeline && <div className="back-to-main">
+            <button className="back-to-main" onClick={e => this.viewMain()}>
+              <span style={{ "color": fontColor }}>BACK to now ></span>
+              <div className="line" style={{ "backgroundColor": fontColor }}></div>
+            </button>
           </div>}
           {/* <div className="infomation">
             {this.state.viewMode == ViewMode.News && <button className="epilog-btn" onClick={e => this.viewEpilog()}>
