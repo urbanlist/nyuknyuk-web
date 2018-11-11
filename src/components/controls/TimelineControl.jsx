@@ -115,7 +115,8 @@ class TimelineControl extends React.Component {
           onTouchStart={e => this._onTimelineTouchStart(e)} onTouchMove={e => this._onTimelineTouchMove(e)}>
           <div className="timeline-bar" style={this.state.timelineBarStyle} ref={this.timelineBar}>
             <div className="start-text">
-              <span>2018.01.01</span>
+              <p>2018</p>
+              <p>01.01</p>
             </div>
             <div className="start-bar"></div>
             <div className="middle-bar">
@@ -133,7 +134,7 @@ class TimelineControl extends React.Component {
             </div>
             <div className="end-bar"></div>
             <div className="end-text">
-              <span>TODAY</span>
+              <p>TODAY</p>
             </div>
           </div>
         </div>
