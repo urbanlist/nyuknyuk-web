@@ -14,6 +14,7 @@ import StarLayer from '../Layers/StarLayer.jsx';
 import TextTypingControl from '../controls/TextTypingControl.jsx';
 import LoadingLayer from '../Layers/LoadingLayer.jsx';
 import EpilogLayer from '../Layers/EpilogLayer.jsx';
+import TimelineControl from '../controls/TimelineControl.jsx';
 import './Home.styl';
 
 
@@ -62,7 +63,7 @@ const convertColorAsSkyStatus = (color, skyStatus) => {
       green: endArg < 6 ? color.end.green : endArg - 6,
       blue: endArg < 41 ? startArg + 20 : endArg + 41
     },
-    isNight: startArg < 50
+    isNight: endArg < 50
   }
 }
 
@@ -163,7 +164,14 @@ const convertMonthToName = month => {
 
 const ViewMode = {
   News: 0,
-  Epilog: 1
+  Epilog: 1,
+  Timeline: 2
+}
+
+const BottomViewMode = {
+  Main: 0,
+  Epilog: 1,
+  Timeline: 2,
 }
 
 
@@ -194,7 +202,8 @@ class Home extends React.Component {
         },
       },
       newsArticles: [],
-      viewMode: ViewMode.News
+      viewMode: ViewMode.News,
+      bottomViewMode: BottomViewMode.Main
     };
 
     this.weatherController = new WeatherController();
@@ -259,6 +268,9 @@ class Home extends React.Component {
   }
 
   setClock() {
+    if (this.state.viewMode != ViewMode.News)
+      return;
+    
     let date = new Date();
     let month = date.getMonth() + 1;
     let day = date.getDate();
@@ -276,6 +288,7 @@ class Home extends React.Component {
   viewEpilog() {
     this.setState({
       viewMode: ViewMode.Epilog,
+      bottomViewMode: BottomViewMode.Epilog,
       color: {
         start: {
           red: 150,
@@ -289,6 +302,21 @@ class Home extends React.Component {
         }
       },
       skyStatus: "SKY_A02"
+    });
+  }
+
+  viewTimeline() {
+    this.setState({
+      viewMode: ViewMode.Timeline,
+      bottomViewMode: BottomViewMode.Timeline
+    });
+  }
+
+  onPointClick(data) {
+    this.setState({
+      viewMode: ViewMode.Timeline,
+      color: data.color,
+      skyStatus: data.skyStatus
     });
   }
 
@@ -314,7 +342,7 @@ class Home extends React.Component {
       <div className="home">
         <SkyColorLayer color={color} />
         {skyAttrs.isDefault && color.isNight == false && clarity()}
-        {this.state.viewMode == ViewMode.News && <div className="top" style={{ "color": fontColor }}>
+        {(this.state.viewMode == ViewMode.News || this.state.viewMode == ViewMode.Timeline) && <div className="top" style={{ "color": fontColor }}>
           <div className="weather">
             {convertSkyCodeToName(this.state.skyStatus) + ", " + this.state.temperature + "°C"}
           </div>
@@ -323,13 +351,24 @@ class Home extends React.Component {
           </div>
         </div>}
         <div className="bottom">
-          <div className="infomation">
+          {this.state.bottomViewMode == BottomViewMode.Main && <div className="bottom-main">
+            <button className="timeline" onClick={e => this.viewTimeline()}>
+              <span style={{ "color": fontColor }}>TIMELINE</span>
+            </button>
+            <button className="epilog" onClick={e => this.viewEpilog()}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.5 59.93" style={{ fill: fontColor }}><g id="레이어_2" data-name="레이어 2"><g id="레이어_1-2" data-name="레이어 1"><path d="M45.5,0H2A2,2,0,0,0,0,2V57.93a2,2,0,0,0,2,2H29l.36,0,.14,0,.23-.07.14-.08a1.06,1.06,0,0,0,.21-.11,1.42,1.42,0,0,0,.3-.25l16.5-16.5a1.87,1.87,0,0,0,.32-.42l.06-.12a2,2,0,0,0,.17-.48h0a1.58,1.58,0,0,0,0-.38V2A2,2,0,0,0,45.5,0ZM31,53.1V43.43h9.67ZM43.5,39.43H29a2,2,0,0,0-2,2v14.5H4V4H43.5Z" /><rect x="10.75" y="10.93" width="26" height="4" /><rect x="11" y="19.93" width="26" height="4" /><rect x="11" y="28.93" width="26" height="4" /></g></g></svg>
+            </button>
+          </div>}
+          {this.state.bottomViewMode == BottomViewMode.Timeline && <div className="timeline">
+            <TimelineControl onPointClick={e => this.onPointClick(e)}/>
+          </div>}
+          {/* <div className="infomation">
             {this.state.viewMode == ViewMode.News && <button className="epilog-btn" onClick={e => this.viewEpilog()}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.5 59.93" style={{ fill: fontColor }}><g id="레이어_2" data-name="레이어 2"><g id="레이어_1-2" data-name="레이어 1"><path d="M45.5,0H2A2,2,0,0,0,0,2V57.93a2,2,0,0,0,2,2H29l.36,0,.14,0,.23-.07.14-.08a1.06,1.06,0,0,0,.21-.11,1.42,1.42,0,0,0,.3-.25l16.5-16.5a1.87,1.87,0,0,0,.32-.42l.06-.12a2,2,0,0,0,.17-.48h0a1.58,1.58,0,0,0,0-.38V2A2,2,0,0,0,45.5,0ZM31,53.1V43.43h9.67ZM43.5,39.43H29a2,2,0,0,0-2,2v14.5H4V4H43.5Z" /><rect x="10.75" y="10.93" width="26" height="4" /><rect x="11" y="19.93" width="26" height="4" /><rect x="11" y="28.93" width="26" height="4" /></g></g></svg>
             </button>}
-          </div>
+          </div> */}
         </div>
-        {this.state.viewMode == ViewMode.News && (<div className="center" style={{ "color": fontColor }}>
+        {(this.state.viewMode == ViewMode.News || this.state.viewMode == ViewMode.Timeline) && (<div className="center" style={{ "color": fontColor }}>
           <div className="text">
             <div className="datetime">
               {this.state.date}
