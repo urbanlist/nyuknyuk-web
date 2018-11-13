@@ -109,8 +109,17 @@ class TimelineControl extends React.Component {
     return (
       <div className="timeline-control">
         <div className="margin"></div>
-        <button className="left" onClick={e => this._moveToLeft()} >(-</button>
-        <div className="margin"></div>
+        <button className="left" onClick={e => this._moveToLeft()} >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.12 15.41">
+            <g id="레이어_2" data-name="레이어 2"><g id="text"><polyline style={{
+              "fill":"none",
+              "stroke":"#fff",
+              "strokeMiterlimit":10,
+              "strokeWidth":2
+            }} points="8.41 0.71 1.41 7.71 8.41 14.71"/></g></g>
+          </svg>
+        </button>
+        <div className="margin-8px"></div>
         <div className="timeline-bar-control"
           onTouchStart={e => this._onTimelineTouchStart(e)} onTouchMove={e => this._onTimelineTouchMove(e)}>
           <div className="timeline-bar" style={this.state.timelineBarStyle} ref={this.timelineBar}>
@@ -138,8 +147,17 @@ class TimelineControl extends React.Component {
             </div>
           </div>
         </div>
-        <div className="margin"></div>
-        <button className="right" onClick={e => this._moveToRight()}>-)</button>
+        <div className="margin-8px"></div>
+        <button className="right" onClick={e => this._moveToRight()}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.12 15.41">
+            <g id="레이어_2" data-name="레이어 2"><g id="text"><polyline style={{
+              "fill":"none",
+              "stroke":"#fff",
+              "strokeMiterlimit":10,
+              "strokeWidth":2
+            }} points="0.71 0.71 7.71 7.71 0.71 14.71"/></g></g>
+          </svg>
+        </button>
         <div className="margin"></div>
       </div>)
   }
