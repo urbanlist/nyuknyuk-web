@@ -9,9 +9,7 @@ class TextTypingControl extends React.Component {
     super(props);
 
     this.speed = this.props.speed ? this.props.speed : 40;
-    this.text = this.props.text;
-    this.textLength = this.text.length;
-    this.pointer = 0;
+    this.text = this.props.text ? this.props.text : "";
     this.isLast = this.props.isLast ? true : false;
 
     this.timer = new IntervalTimer(this.typing.bind(this), this.speed);
@@ -19,6 +17,9 @@ class TextTypingControl extends React.Component {
       text: "",
       isLast: false
     };
+
+    this.textLength = this.text.length;
+    this.pointer = 0;
   }
 
   typing() {
@@ -34,13 +35,11 @@ class TextTypingControl extends React.Component {
       text: this.state.text + this.text[this.pointer]
     });
     this.pointer += 1;
-    // if (this.textLength == this.pointer) {
-
-    // }
   }
 
-  componentDidMount() {
-    this.timer.start();
+  changeText() {
+    this.textLength = this.text.length;
+    this.pointer = 0;
   }
 
   componentWillUnmount() {
@@ -48,7 +47,17 @@ class TextTypingControl extends React.Component {
   }
 
   render() {
+    if (this.text != this.props.text) {
+      this.text = this.props.text;
+      this.textLength = this.text.length;
+      this.pointer = 0;
+      this.state.text = "";
+      this.timer.start();
+      return <div><p>-</p></div>;
+    }
+
     let last = this.state.isLast ? (<span class="next">_</span>) : null;
+
     return (<div>
       <p><span>{this.state.text}</span></p>
       <p>{last}</p>
