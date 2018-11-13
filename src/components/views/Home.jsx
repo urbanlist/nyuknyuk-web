@@ -264,7 +264,6 @@ class Home extends React.Component {
       });
     });
     this.newsController.get(data => {
-      console.log("this.newsController.get");
       this.setState({
         newsArticles: data.articles
       });
@@ -344,7 +343,6 @@ class Home extends React.Component {
     let skyAttrs = convertSkyCodeToParameter(skyStatus);
 
     let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : [{title:"-"}];
-    console.log(newsArticles[0].title);
 
     let color = convertColorAsSkyStatus(this.state.color, skyStatus);
 
