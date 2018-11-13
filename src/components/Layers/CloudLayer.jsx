@@ -23,9 +23,12 @@ class CloudLayer extends React.Component {
   }
 
   buildCloud() {
-    if (!this.props.isVisible)
+    if (!this.props.isVisible){
+      this.state.cloudKeys = [];
       return;
+    }
 
+    let cloudCount = 10;
     let cloudTuple = this.state.cloudKeys;
 
     let height = buildCloudHeight();
@@ -41,7 +44,7 @@ class CloudLayer extends React.Component {
       [this.cloudId, height]
     );
 
-    if (cloudTuple.length >= 10) {
+    if (cloudTuple.length >= cloudCount) {
       cloudTuple.shift();
     }
     this.setState({
