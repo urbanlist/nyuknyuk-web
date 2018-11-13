@@ -203,7 +203,7 @@ class Home extends React.Component {
       },
       newsArticles: [],
       viewMode: ViewMode.News,
-      bottomViewMode: BottomViewMode.Timeline
+      bottomViewMode: BottomViewMode.Main
     };
 
     this.weatherController = new WeatherController();
@@ -237,26 +237,26 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    this.weatherTimer.start();
-    this.clockTimer.start();
-
-    this.newsController.get(data => {
-      this.setState({
-        newsArticles: data.articles
-      });
-    });
+    this.startTimer();
   }
 
   componentWillUnmount() {
-    window.clearTimeout(this.timer);
+    this.stopTimer();
+  }
+
+  startTimer() {
+    console.log("startTimer");
+    this.weatherTimer.start();
+    this.clockTimer.start();
+  }
+
+  stopTimer() {
+    console.log("stopTimer");
     this.weatherTimer.stop();
     this.clockTimer.stop();
   }
 
   setWeather() {
-    if (this.state.viewMode != ViewMode.News)
-      return;
-
     this.weatherController.get(data => {
       this.setState({
         temperature: data.temperature,
@@ -265,12 +265,14 @@ class Home extends React.Component {
         color: data.color
       });
     });
+    this.newsController.get(data => {
+      this.setState({
+        newsArticles: data.articles
+      });
+    });
   }
 
   setClock() {
-    if (this.state.viewMode != ViewMode.News)
-      return;
-    
     let date = new Date();
     let month = date.getMonth() + 1;
     let day = date.getDate();
@@ -286,6 +288,7 @@ class Home extends React.Component {
   }
 
   viewEpilog() {
+    this.stopTimer();
     this.setState({
       viewMode: ViewMode.Epilog,
       bottomViewMode: BottomViewMode.Epilog,
@@ -306,6 +309,7 @@ class Home extends React.Component {
   }
 
   viewTimeline() {
+    this.stopTimer();
     this.setState({
       viewMode: ViewMode.Timeline,
       bottomViewMode: BottomViewMode.Timeline
@@ -313,13 +317,14 @@ class Home extends React.Component {
   }
 
   viewMain() {
+    this.startTimer();
     this.setState({
       viewMode: ViewMode.News,
       bottomViewMode: BottomViewMode.Main
     });
   }
 
-  onPointClick(data) {
+  onTimelinePointClick(data) {
     this.setState({
       viewMode: ViewMode.Timeline,
       color: data.color,
@@ -367,7 +372,7 @@ class Home extends React.Component {
             </button>
           </div>}
           {this.state.bottomViewMode == BottomViewMode.Timeline && <div className="timeline">
-            <TimelineControl onPointClick={e => this.onPointClick(e)}/>
+            <TimelineControl onPointClick={e => this.onTimelinePointClick(e)}/>
           </div>}
           {this.state.bottomViewMode == BottomViewMode.Timeline && <div className="back-to-main">
             <button className="back-to-main" onClick={e => this.viewMain()}>
