@@ -245,13 +245,11 @@ class Home extends React.Component {
   }
 
   startTimer() {
-    console.log("startTimer");
     this.weatherTimer.start();
     this.clockTimer.start();
   }
 
   stopTimer() {
-    console.log("stopTimer");
     this.weatherTimer.stop();
     this.clockTimer.stop();
   }
@@ -266,6 +264,7 @@ class Home extends React.Component {
       });
     });
     this.newsController.get(data => {
+      console.log("this.newsController.get");
       this.setState({
         newsArticles: data.articles
       });
@@ -328,7 +327,11 @@ class Home extends React.Component {
     this.setState({
       viewMode: ViewMode.Timeline,
       color: data.color,
-      skyStatus: data.skyStatus
+      skyStatus: data.skyStatus,
+      newsArticles: data.newsArticles,
+      date: data.date,
+      temperature: data.temperature,
+      windSpeed: data.windSpeed,
     });
   }
 
@@ -340,7 +343,8 @@ class Home extends React.Component {
     }
     let skyAttrs = convertSkyCodeToParameter(skyStatus);
 
-    let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : ["북미, 일부 성과에도 입장차 확인…후속협상에 공 넘겨"];
+    let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : [{title:"-"}];
+    console.log(newsArticles[0].title);
 
     let color = convertColorAsSkyStatus(this.state.color, skyStatus);
 
@@ -392,7 +396,7 @@ class Home extends React.Component {
               {this.state.date}
             </div>
             <div className="content">
-              {newsArticles[0].title}
+              <TextTypingControl text={newsArticles[0].title} speed={80}/>
             </div>
           </div>
         </div>)}

@@ -49,6 +49,9 @@ class TimelineControl extends React.Component {
   _onPointClick1() {
     if (this.props.onPointClick)
       this.props.onPointClick({
+        date: '2018. 7. 13. 21:46',
+        temperature: '20',
+        windSpeed: '-',
         color: {
           start: {
             red: 30,
@@ -61,6 +64,9 @@ class TimelineControl extends React.Component {
             blue: 40
           }
         },
+        newsArticles: [{
+          title: "테스트1"
+        }],
         skyStatus: "SKY_A03"
       });
   }
@@ -68,6 +74,8 @@ class TimelineControl extends React.Component {
   _onPointClick2() {
     if (this.props.onPointClick)
       this.props.onPointClick({
+        date: '2018. 3. 13. 21:46',
+        temperature: '20',
         color: {
           start: {
             red: 20,
@@ -80,6 +88,9 @@ class TimelineControl extends React.Component {
             blue: 30
           }
         },
+        newsArticles: [{
+          title: "테스트2"
+        }],
         skyStatus: "SKY_A11"
       });
   }
