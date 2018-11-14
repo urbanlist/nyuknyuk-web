@@ -39,18 +39,19 @@ class TextTypingControl extends React.Component {
   }
 
   typing() {
+    this.setState({
+      text: this.state.text + this.text[this.pointer]
+    });
+    this.pointer += 1;
+    
     if (this.textLength <= this.pointer) {
       this.timer.stop();
       this.setState({
         isLast: true
       });
-      return;
+      if (this.props.onAnimationEnd)
+        this.props.onAnimationEnd();
     }
-
-    this.setState({
-      text: this.state.text + this.text[this.pointer]
-    });
-    this.pointer += 1;
   }
 
   componentWillUnmount() {
@@ -73,7 +74,7 @@ class TextTypingControl extends React.Component {
 
     return (<div className="text-typing-control">
       <p><span>{this.state.text}</span><span className="next">{go}</span></p>
-      <p class="last"><span className="next">{last}</span></p>
+      <p className="last"><span className="next">{last}</span></p>
     </div>)
   }
 }

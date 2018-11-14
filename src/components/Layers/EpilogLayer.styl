@@ -12,10 +12,10 @@
     @keyframes text-fade-in-ani
       0%
         opacity 0
-        transform translateY(0px)
+        transform translateY(10px)
       100%
         opacity 1
-        transform translateY(-10px)
+        transform translateY(0px)
     @keyframes text-next-ani
       0%
         opacity 0
@@ -37,7 +37,11 @@
           svg
             width 8px
       .text-fadein
-        for row in 1 2 3 4 5 6 7 8 9 10
+        for row in 0 1 2 3 4 5 6 7 8 9 10
+          p.skip:nth-child({row})
+            opacity 1
+            animation none
+        for row in 0 1 2 3 4 5 6 7 8 9 10
           p:nth-child({row})
             opacity 0
-            animation text-fade-in-ani .7s row * .8s forwards
+            animation text-fade-in-ani .7s row * .7s forwards
