@@ -14,35 +14,51 @@ class TimelineControl extends React.Component {
     this.state = {
       timelineBarStyle: {
         "transform": "translateX(0px)"
-      }
+      },
+      isVisibleLeft: false,
+      isVisibleRight: true
     };
     this.scrollX = 0;
     this.timelineBar = React.createRef();
   }
 
   _moveToRight() {
+    let isVisibleLeft = true;
+    let isVisibleRight = true;
+
     let controlWidth = this.timelineBar.current.clientWidth;
-    let timelineWidth = controlWidth * -1 - 50;
+    let timelineWidth = controlWidth * -1;
     this.scrollX = this.scrollX - getTimelineViewWidth() + 20;
-    if (this.scrollX < timelineWidth + getTimelineViewWidth())
+    if (this.scrollX < timelineWidth + getTimelineViewWidth()) {
       this.scrollX = timelineWidth + getTimelineViewWidth();
+      isVisibleRight = false;
+    }
 
     this.setState({
       timelineBarStyle: {
         "transform": `translateX(${this.scrollX}px)`
-      }
+      },
+      isVisibleLeft: isVisibleLeft,
+      isVisibleRight: isVisibleRight
     });
   }
 
   _moveToLeft() {
+    let isVisibleLeft = true;
+    let isVisibleRight = true;
+
     this.scrollX = this.scrollX + getTimelineViewWidth() - 20;
-    if (this.scrollX > 0)
+    if (this.scrollX > 0) {
+      isVisibleLeft = false;
       this.scrollX = 0;
+    }
 
     this.setState({
       timelineBarStyle: {
         "transform": `translateX(${this.scrollX}px)`
-      }
+      },
+      isVisibleLeft: isVisibleLeft,
+      isVisibleRight: isVisibleRight
     });
   }
 
@@ -67,7 +83,7 @@ class TimelineControl extends React.Component {
         newsArticles: [{
           title: "테스트1"
         }],
-        skyStatus: "SKY_A03"
+        skyStatus: "SKY_A02"
       });
   }
 
@@ -120,14 +136,16 @@ class TimelineControl extends React.Component {
     return (
       <div className="timeline-control">
         <div className="margin"></div>
-        <button className="left" onClick={e => this._moveToLeft()} >
+        <button className="left" onClick={e => this._moveToLeft()} style={{
+          visibility: this.state.isVisibleLeft ? "visible" : "hidden"
+        }}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.12 15.41">
-            <g id="레이어_2" data-name="레이어 2"><g id="text"><polyline style={{
-              "fill":"none",
-              "stroke":"#fff",
-              "strokeMiterlimit":10,
-              "strokeWidth":2
-            }} points="8.41 0.71 1.41 7.71 8.41 14.71"/></g></g>
+            <g><g><polyline style={{
+              "fill": "none",
+              "stroke": "#fff",
+              "strokeMiterlimit": 10,
+              "strokeWidth": 2
+            }} points="8.41 0.71 1.41 7.71 8.41 14.71" /></g></g>
           </svg>
         </button>
         <div className="margin-8px"></div>
@@ -159,14 +177,16 @@ class TimelineControl extends React.Component {
           </div>
         </div>
         <div className="margin-8px"></div>
-        <button className="right" onClick={e => this._moveToRight()}>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.12 15.41">
-            <g id="레이어_2" data-name="레이어 2"><g id="text"><polyline style={{
-              "fill":"none",
-              "stroke":"#fff",
-              "strokeMiterlimit":10,
-              "strokeWidth":2
-            }} points="0.71 0.71 7.71 7.71 0.71 14.71"/></g></g>
+        <button className="right" onClick={e => this._moveToRight()} style={{
+          visibility: this.state.isVisibleRight ? "visible" : "hidden"
+        }}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.12 15.41">
+            <g><g><polyline style={{
+              "fill": "none",
+              "stroke": "#fff",
+              "strokeMiterlimit": 10,
+              "strokeWidth": 2
+            }} points="0.71 0.71 7.71 7.71 0.71 14.71" /></g></g>
           </svg>
         </button>
         <div className="margin"></div>
