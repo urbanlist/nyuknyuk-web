@@ -76,11 +76,6 @@ class EpilogLayer extends React.Component {
   nextStory() {
     let story = this.state.story;
 
-    if (story > 12) {
-      location.reload();
-      return;
-    }
-
     if (story == 4) {
       if (this.isStory4End == false) {
         return;
@@ -95,6 +90,11 @@ class EpilogLayer extends React.Component {
     }
 
     story = this.state.story + 1;
+    
+    if (story > 12) {
+      location.reload();
+      return;
+    }
     this.setState({
       story: story
     });
