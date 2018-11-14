@@ -162,6 +162,18 @@ const convertMonthToName = month => {
 }
 
 
+const createRightIcon = () => {
+  return (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.12 15.41">
+    <g><g><polyline style={{
+      "fill": "none",
+      "stroke": "#fff",
+      "strokeMiterlimit": 10,
+      "strokeWidth": 2
+    }} points="0.71 0.71 7.71 7.71 0.71 14.71" /></g></g>
+  </svg>);
+}
+
+
 const ViewMode = {
   News: 0,
   Epilog: 1,
@@ -342,7 +354,7 @@ class Home extends React.Component {
     }
     let skyAttrs = convertSkyCodeToParameter(skyStatus);
 
-    let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : [{title:"-"}];
+    let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : [{ title: "-" }];
 
     let color = convertColorAsSkyStatus(this.state.color, skyStatus);
 
@@ -368,13 +380,14 @@ class Home extends React.Component {
           {this.state.bottomViewMode == BottomViewMode.Main && <div className="bottom-main">
             <button className="timeline" onClick={e => this.viewTimeline()}>
               <span style={{ "color": fontColor }}>TIMELINE</span>
+              {createRightIcon()}
             </button>
             <button className="epilog" onClick={e => this.viewEpilog()}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.5 59.93" style={{ fill: fontColor }}><g id="레이어_2" data-name="레이어 2"><g id="레이어_1-2" data-name="레이어 1"><path d="M45.5,0H2A2,2,0,0,0,0,2V57.93a2,2,0,0,0,2,2H29l.36,0,.14,0,.23-.07.14-.08a1.06,1.06,0,0,0,.21-.11,1.42,1.42,0,0,0,.3-.25l16.5-16.5a1.87,1.87,0,0,0,.32-.42l.06-.12a2,2,0,0,0,.17-.48h0a1.58,1.58,0,0,0,0-.38V2A2,2,0,0,0,45.5,0ZM31,53.1V43.43h9.67ZM43.5,39.43H29a2,2,0,0,0-2,2v14.5H4V4H43.5Z" /><rect x="10.75" y="10.93" width="26" height="4" /><rect x="11" y="19.93" width="26" height="4" /><rect x="11" y="28.93" width="26" height="4" /></g></g></svg>
             </button>
           </div>}
           {this.state.bottomViewMode == BottomViewMode.Timeline && <div className="timeline">
-            <TimelineControl onPointClick={e => this.onTimelinePointClick(e)}/>
+            <TimelineControl onPointClick={e => this.onTimelinePointClick(e)} />
           </div>}
           {this.state.bottomViewMode == BottomViewMode.Timeline && <div className="back-to-main">
             <button className="back-to-main" onClick={e => this.viewMain()}>
@@ -394,7 +407,7 @@ class Home extends React.Component {
               {this.state.date}
             </div>
             <div className="content">
-              <TextTypingControl text={newsArticles[0].title} speed={80}/>
+              <TextTypingControl text={newsArticles[0].title} speed={80} />
             </div>
           </div>
         </div>)}

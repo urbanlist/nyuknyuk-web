@@ -4,6 +4,18 @@ import IntervalTimer from '../modules/IntervalTimer.js';
 import './TextTypingControl.styl';
 
 
+const createRightIcon = () => {
+  return (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.12 15.41">
+    <g><g><polyline style={{
+      "fill": "none",
+      "stroke": "#fff",
+      "strokeMiterlimit": 10,
+      "strokeWidth": 2
+    }} points="0.71 0.71 7.71 7.71 0.71 14.71" /></g></g>
+  </svg>);
+}
+
+
 class TextTypingControl extends React.Component {
   constructor(props) {
     super(props);
@@ -56,12 +68,12 @@ class TextTypingControl extends React.Component {
       return <div><p>|</p></div>;
     }
 
-    let last = this.isLastIcon && this.state.isLast ? (<span className="next">|</span>) : null;
+    let last = this.isLastIcon && this.state.isLast ? createRightIcon() : null;
     let go = this.state.isLast ? "" : "|";
 
     return (<div className="text-typing-control">
       <p><span>{this.state.text}</span><span className="next">{go}</span></p>
-      <p>{last}</p>
+      <p class="last"><span className="next">{last}</span></p>
     </div>)
   }
 }
