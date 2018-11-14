@@ -10,7 +10,7 @@ class TextTypingControl extends React.Component {
 
     this.speed = this.props.speed ? this.props.speed : 40;
     this.text = this.props.text ? this.props.text : "";
-    this.isLast = this.props.isLast ? true : false;
+    this.isLastIcon = this.props.isLastIcon ? true : false;
 
     this.timer = new IntervalTimer(this.typing.bind(this), this.speed);
     this.state = {
@@ -22,11 +22,15 @@ class TextTypingControl extends React.Component {
     this.pointer = 0;
   }
 
+  componentDidMount() {
+    this.timer.start();
+  }
+
   typing() {
     if (this.textLength <= this.pointer) {
       this.timer.stop();
       this.setState({
-        isLast: this.isLast
+        isLast: true
       });
       return;
     }
@@ -35,11 +39,6 @@ class TextTypingControl extends React.Component {
       text: this.state.text + this.text[this.pointer]
     });
     this.pointer += 1;
-  }
-
-  changeText() {
-    this.textLength = this.text.length;
-    this.pointer = 0;
   }
 
   componentWillUnmount() {
@@ -52,14 +51,16 @@ class TextTypingControl extends React.Component {
       this.textLength = this.text.length;
       this.pointer = 0;
       this.state.text = "";
+      this.state.isLast = false;
       this.timer.start();
-      return <div><p>-</p></div>;
+      return <div><p>|</p></div>;
     }
 
-    let last = this.state.isLast ? (<span class="next">_</span>) : null;
+    let last = this.isLastIcon && this.state.isLast ? (<span className="next">|</span>) : null;
+    let go = this.state.isLast ? "" : "|";
 
-    return (<div>
-      <p><span>{this.state.text}</span></p>
+    return (<div className="text-typing-control">
+      <p><span>{this.state.text}</span><span className="next">{go}</span></p>
       <p>{last}</p>
     </div>)
   }
