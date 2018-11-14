@@ -99,7 +99,7 @@ class EpilogLayer extends React.Component {
               <p className="next"><span className="next">_️</span></p>
             </div>}
             {story == 4 && <div className="text">
-              <TextTypingControl text={"이렇게 아름다운 날, 큰 지진이 일어나면 어떡하지?"} speed={100} isLast={true}/>
+              <TextTypingControl text={"이렇게 아름다운 날, 큰 지진이 일어나면 어떡하지?"} speed={100} isLastIcon={true}/>
             </div>}
             {story == 5 && <div className="text text-fadein">
               <p>꼭 죽음이 코앞에 닥쳐온 것처럼 불안감이 크게 일었다.</p>
