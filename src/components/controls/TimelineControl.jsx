@@ -132,6 +132,26 @@ class TimelineControl extends React.Component {
 
   render() {
     // transform translate3d(200px, 4px, 0)
+    let controlWidth = 700;
+    let blockAboutMonth = controlWidth / 12;
+
+    let monthBars = new Array(11).fill(1).map((val,idx) => {
+      return (
+        <div className="month-bar" key={idx} style={{
+          transform: `translateX(${(idx+1)*blockAboutMonth}px)`
+        }}></div>
+      )
+    });
+    let monthTextes = ["Jan.", "Feb.", "Mar.", "Apr.",
+                      "May", "June", "July", "August",
+                      "September", "October", "November", "December"]
+                      .map((val, idx) => {
+                        return (
+                          <div className="month-text" key={idx} style={{
+                            transform: `translateX(${(idx+1)*blockAboutMonth}px)`
+                          }}>{val}</div>
+                        )
+                      });
 
     return (
       <div className="timeline-control">
@@ -159,6 +179,8 @@ class TimelineControl extends React.Component {
             <div className="start-bar"></div>
             <div className="middle-bar">
               <div className="bar"></div>
+              {monthBars}
+              {monthTextes}
               <button className="time-point-button" onClick={e => this._onPointClick1()} style={{
                 left: 50
               }}>
