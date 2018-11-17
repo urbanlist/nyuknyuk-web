@@ -74,7 +74,7 @@ class TextTypingControl extends React.Component {
 
     return (<div className="text-typing-control">
       <p><span>{this.state.text}</span><span className="next">{go}</span></p>
-      <p className="last"><span className="next">{last}</span></p>
+      <p className="last"><span className="next">&nbsp;{last}</span></p>
     </div>)
   }
 }
