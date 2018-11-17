@@ -16,6 +16,7 @@ import LoadingLayer from '../Layers/LoadingLayer.jsx';
 import EpilogLayer from '../Layers/EpilogLayer.jsx';
 import TimelineControl from '../controls/TimelineControl.jsx';
 import './Home.styl';
+import DateTimeHelper from '../helper/DateTimeHelper.js';
 
 import icn_a01 from '../../../assets/icn/icn_a01.svg';
 import icn_a02 from '../../../assets/icn/icn_a02.svg';
@@ -290,16 +291,8 @@ class Home extends React.Component {
 
   setClock() {
     let date = new Date();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    let year = date.getFullYear();
-    let hour = date.getHours();
-    let min = date.getMinutes();
-    let hourFormat = ("0" + hour).slice(-2);
-    let minFormat = ("0" + min).slice(-2);
-
     this.setState({
-      dateStr: `${year}. ${month}. ${day}. ${hourFormat}:${minFormat}`
+      dateStr: DateTimeHelper.toStringForNyukNyuk(date)
     });
   }
 
@@ -346,7 +339,7 @@ class Home extends React.Component {
       color: data.color,
       skyStatus: data.skyStatus,
       newsArticles: data.newsArticles,
-      dateStr: data.dateStr,
+      dateStr: DateTimeHelper.toStringForNyukNyuk(data.date),
       temperature: data.temperature,
       windSpeed: data.windSpeed,
     });

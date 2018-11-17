@@ -6,7 +6,7 @@ const getData = () => {
   return {
     data: [
       {
-        dateStr: '2018.08.02 오후 6:14',
+        date: new Date(2018,8,2,17,14),
         temperature: '20',
         windSpeed: '-',
         color: {
@@ -27,7 +27,7 @@ const getData = () => {
         skyStatus: "SKY_A02"
       },
       {
-        dateStr: '2018.08.18. 15:33',
+        date: new Date(2018,8,18,15,33),
         temperature: '20',
         color: {
           start: {
