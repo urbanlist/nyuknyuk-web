@@ -71,9 +71,14 @@ class TextTypingControl extends React.Component {
 
     let last = this.isLastIcon && this.state.isLast ? createRightIcon() : null;
     let go = this.state.isLast ? "" : "|";
+    let textControls = this.state.text.split("").map((val, idx) => {
+      return (
+        <span key={idx}>{val}</span>
+      )
+    });
 
     return (<div className="text-typing-control">
-      <p><span>{this.state.text}</span><span className="next">{go}</span></p>
+      <p className="text">{textControls}<span className="next">{go}</span></p>
       <p className="last"><span className="next">&nbsp;{last}</span></p>
     </div>)
   }
