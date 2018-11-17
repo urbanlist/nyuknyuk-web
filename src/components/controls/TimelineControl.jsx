@@ -2,6 +2,66 @@ import React from "react";
 import "./TimelineControl.styl";
 
 
+const getData = () => {
+  return {
+    data: [
+      {
+        dateStr: '2018.08.02 오후 6:14',
+        temperature: '20',
+        windSpeed: '-',
+        color: {
+          start: {
+            red: 30,
+            green: 30,
+            blue: 30
+          },
+          end: {
+            red: 40,
+            green: 40,
+            blue: 40
+          }
+        },
+        newsArticles: [{
+          title: "효도관광 길 네 모녀 역주행 차량에 '날벼락'"
+        }],
+        skyStatus: "SKY_A02"
+      },
+      {
+        dateStr: '2018.08.18. 15:33',
+        temperature: '20',
+        color: {
+          start: {
+            red: 20,
+            green: 10,
+            blue: 10
+          },
+          end: {
+            red: 40,
+            green: 30,
+            blue: 30
+          }
+        },
+        newsArticles: [{
+          title: "부산 아파트 엘리베이터에서 20대 경비원 추락사"
+        }],
+        skyStatus: "SKY_A11"
+      },
+    ]
+  };
+}
+
+
+const getMonthNameList = ["Jan.", "Feb.", "Mar", "Apr.",
+  "May.", "Jun.", "Jul.", "Aug.",
+  "Sep.", "Oct.", "Nov.", "Dec."]
+
+
+const getMonthNames = (month) => {
+  let list = getMonthNameList.concat(getMonthNameList);
+  return list.splice(month + 1, 11);
+}
+
+
 const getTimelineViewWidth = () => {
   return window.innerWidth - 70 - 70;
 }
@@ -62,53 +122,9 @@ class TimelineControl extends React.Component {
     });
   }
 
-  _onPointClick1() {
+  _onPointClick(model) {
     if (this.props.onPointClick)
-      this.props.onPointClick({
-        date: '2018. 7. 13. 21:46',
-        temperature: '20',
-        windSpeed: '-',
-        color: {
-          start: {
-            red: 30,
-            green: 30,
-            blue: 30
-          },
-          end: {
-            red: 40,
-            green: 40,
-            blue: 40
-          }
-        },
-        newsArticles: [{
-          title: "테스트1"
-        }],
-        skyStatus: "SKY_A02"
-      });
-  }
-
-  _onPointClick2() {
-    if (this.props.onPointClick)
-      this.props.onPointClick({
-        date: '2018. 3. 13. 21:46',
-        temperature: '20',
-        color: {
-          start: {
-            red: 20,
-            green: 10,
-            blue: 10
-          },
-          end: {
-            red: 40,
-            green: 30,
-            blue: 30
-          }
-        },
-        newsArticles: [{
-          title: "테스트2"
-        }],
-        skyStatus: "SKY_A11"
-      });
+      this.props.onPointClick(model);
   }
 
   _onTimelineTouchStart(e) {
@@ -135,23 +151,33 @@ class TimelineControl extends React.Component {
     let controlWidth = 700;
     let blockAboutMonth = controlWidth / 12;
 
-    let monthBars = new Array(11).fill(1).map((val,idx) => {
+    let monthBars = new Array(11).fill(1).map((val, idx) => {
       return (
         <div className="month-bar" key={idx} style={{
-          transform: `translateX(${(idx+1)*blockAboutMonth}px)`
+          transform: `translateX(${(idx + 1) * blockAboutMonth}px)`
         }}></div>
       )
     });
-    let monthTextes = ["Jan.", "Feb.", "Mar.", "Apr.",
-                      "May.", "Jun.", "Jul.", "Aug.",
-                      "Sep.", "Oct.", "Nov."]
-                      .map((val, idx) => {
-                        return (
-                          <div className="month-text" key={idx} style={{
-                            transform: `translateX(${(idx+1)*blockAboutMonth}px)`
-                          }}>{val}</div>
-                        )
-                      });
+
+    let monthList = getMonthNames(11);
+    let monthTextes = monthList
+      .map((val, idx) => {
+        return (
+          <div className="month-text" key={idx} style={{
+            transform: `translateX(${(idx + 1) * blockAboutMonth}px)`
+          }}>{val}</div>
+        )
+      });
+
+    let newsPoints = getData().data.map((val, idx) => {
+      return (
+        <button className="time-point-button" key={idx} onClick={e => this._onPointClick(val)} style={{
+          left: 50 + idx * 50
+        }}>
+          <div className="time-point"></div>
+        </button>
+      );
+    });
 
     return (
       <div className="timeline-control">
@@ -181,7 +207,8 @@ class TimelineControl extends React.Component {
               <div className="bar"></div>
               {monthBars}
               {monthTextes}
-              <button className="time-point-button" onClick={e => this._onPointClick1()} style={{
+              {newsPoints}
+              {/* <button className="time-point-button" onClick={e => this._onPointClick1()} style={{
                 left: 50
               }}>
                 <div className="time-point"></div>
@@ -190,7 +217,7 @@ class TimelineControl extends React.Component {
                 left: 150
               }}>
                 <div className="time-point"></div>
-              </button>
+              </button> */}
             </div>
             <div className="end-bar"></div>
             <div className="end-text">
