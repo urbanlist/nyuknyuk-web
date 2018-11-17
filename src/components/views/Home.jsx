@@ -197,7 +197,7 @@ class Home extends React.Component {
         Random(0, window.innerWidth),
         Random(0, window.innerWidth),
         Random(0, window.innerWidth)],
-      date: '-',
+      dateStr: '-',
       temperature: '-',
       skyStatus: '-',
       windSpeed: '-',
@@ -293,7 +293,7 @@ class Home extends React.Component {
     let minFormat = ("0" + min).slice(-2);
 
     this.setState({
-      date: `${year}. ${month}. ${day}. ${hourFormat}:${minFormat}`
+      dateStr: `${year}. ${month}. ${day}. ${hourFormat}:${minFormat}`
     });
   }
 
@@ -340,7 +340,7 @@ class Home extends React.Component {
       color: data.color,
       skyStatus: data.skyStatus,
       newsArticles: data.newsArticles,
-      date: data.date,
+      dateStr: data.dateStr,
       temperature: data.temperature,
       windSpeed: data.windSpeed,
     });
@@ -404,7 +404,7 @@ class Home extends React.Component {
         {(this.state.viewMode == ViewMode.News || this.state.viewMode == ViewMode.Timeline) && (<div className="center" style={{ "color": fontColor }}>
           <div className="text">
             <div className="datetime">
-              {this.state.date}
+              {this.state.dateStr}
             </div>
             <div className="content">
               <TextTypingControl text={newsArticles[0].title} speed={80} />
