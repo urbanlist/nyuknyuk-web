@@ -17,6 +17,11 @@ import EpilogLayer from '../Layers/EpilogLayer.jsx';
 import TimelineControl from '../controls/TimelineControl.jsx';
 import './Home.styl';
 
+import icn_a01 from '../../../assets/icn/icn_a01.svg';
+import icn_a02 from '../../../assets/icn/icn_a02.svg';
+import icn_a03 from '../../../assets/icn/icn_a03.svg';
+import icn_a04 from '../../../assets/icn/icn_a04.svg';
+
 
 const convertSkyCodeToName = code => {
   let dic = {
@@ -76,6 +81,7 @@ const convertSkyCodeToParameter = code => {
     isThunder: false,
     isOvercase: false,
     cloudLevel: 0,
+    weatherIcon: icn_a01
   };
 
   switch (code) {
@@ -369,8 +375,11 @@ class Home extends React.Component {
         <SkyColorLayer color={color} />
         {skyAttrs.isDefault && color.isNight == false && clarity()}
         {(this.state.viewMode == ViewMode.News || this.state.viewMode == ViewMode.Timeline) && <div className="top" style={{ "color": fontColor }}>
+          <div className="weather-img">
+            <img src={skyAttrs.weatherIcon} />
+          </div>
           <div className="weather">
-            {convertSkyCodeToName(this.state.skyStatus) + ", " + this.state.temperature + "°C"}
+            <div>{convertSkyCodeToName(this.state.skyStatus) + ", " + this.state.temperature + "°C"}</div>
           </div>
           <div className="place">
             {"YONGIN"}
