@@ -143,8 +143,8 @@ class TimelineControl extends React.Component {
       )
     });
     let monthTextes = ["Jan.", "Feb.", "Mar.", "Apr.",
-                      "May", "June", "July", "August",
-                      "September", "October", "November", "December"]
+                      "May.", "Jun.", "Jul.", "Aug.",
+                      "Sep.", "Oct.", "Nov."]
                       .map((val, idx) => {
                         return (
                           <div className="month-text" key={idx} style={{
