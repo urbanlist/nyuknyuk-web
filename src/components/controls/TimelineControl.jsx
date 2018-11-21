@@ -6,7 +6,7 @@ const getData = () => {
   return {
     data: [
       {
-        date: new Date(2018,8,2,17,14),
+        date: new Date(2017,11,15,0,0),
         temperature: '20',
         windSpeed: '-',
         color: {
@@ -27,24 +27,235 @@ const getData = () => {
         skyStatus: "SKY_A02"
       },
       {
-        date: new Date(2018,8,18,15,33),
+        date: new Date(2018,0,1,0,0),
         temperature: '20',
+        windSpeed: '-',
         color: {
           start: {
-            red: 20,
-            green: 10,
-            blue: 10
+            red: 30,
+            green: 30,
+            blue: 30
           },
           end: {
             red: 40,
-            green: 30,
-            blue: 30
+            green: 40,
+            blue: 40
           }
         },
         newsArticles: [{
-          title: "부산 아파트 엘리베이터에서 20대 경비원 추락사"
+          title: "효도관광 길 네 모녀 역주행 차량에 '날벼락'"
         }],
-        skyStatus: "SKY_A11"
+        skyStatus: "SKY_A02"
+      },
+      {
+        date: new Date(2018,1,20,0,0),
+        temperature: '20',
+        windSpeed: '-',
+        color: {
+          start: {
+            red: 30,
+            green: 30,
+            blue: 30
+          },
+          end: {
+            red: 40,
+            green: 40,
+            blue: 40
+          }
+        },
+        newsArticles: [{
+          title: "효도관광 길 네 모녀 역주행 차량에 '날벼락'"
+        }],
+        skyStatus: "SKY_A02"
+      },
+      {
+        date: new Date(2018,2,1,0,0),
+        temperature: '20',
+        windSpeed: '-',
+        color: {
+          start: {
+            red: 30,
+            green: 30,
+            blue: 30
+          },
+          end: {
+            red: 40,
+            green: 40,
+            blue: 40
+          }
+        },
+        newsArticles: [{
+          title: "효도관광 길 네 모녀 역주행 차량에 '날벼락'"
+        }],
+        skyStatus: "SKY_A02"
+      },
+      {
+        date: new Date(2018,3,30,0,0),
+        temperature: '20',
+        windSpeed: '-',
+        color: {
+          start: {
+            red: 30,
+            green: 30,
+            blue: 30
+          },
+          end: {
+            red: 40,
+            green: 40,
+            blue: 40
+          }
+        },
+        newsArticles: [{
+          title: "효도관광 길 네 모녀 역주행 차량에 '날벼락'"
+        }],
+        skyStatus: "SKY_A02"
+      },
+      {
+        date: new Date(2018,4,1,0,0),
+        temperature: '20',
+        windSpeed: '-',
+        color: {
+          start: {
+            red: 30,
+            green: 30,
+            blue: 30
+          },
+          end: {
+            red: 40,
+            green: 40,
+            blue: 40
+          }
+        },
+        newsArticles: [{
+          title: "효도관광 길 네 모녀 역주행 차량에 '날벼락'"
+        }],
+        skyStatus: "SKY_A02"
+      },
+      {
+        date: new Date(2018,5,1,0,0),
+        temperature: '20',
+        windSpeed: '-',
+        color: {
+          start: {
+            red: 30,
+            green: 30,
+            blue: 30
+          },
+          end: {
+            red: 40,
+            green: 40,
+            blue: 40
+          }
+        },
+        newsArticles: [{
+          title: "효도관광 길 네 모녀 역주행 차량에 '날벼락'"
+        }],
+        skyStatus: "SKY_A02"
+      },
+      {
+        date: new Date(2018,6,1,0,0),
+        temperature: '20',
+        windSpeed: '-',
+        color: {
+          start: {
+            red: 30,
+            green: 30,
+            blue: 30
+          },
+          end: {
+            red: 40,
+            green: 40,
+            blue: 40
+          }
+        },
+        newsArticles: [{
+          title: "효도관광 길 네 모녀 역주행 차량에 '날벼락'"
+        }],
+        skyStatus: "SKY_A02"
+      },
+      {
+        date: new Date(2018,7,1,0,0),
+        temperature: '20',
+        windSpeed: '-',
+        color: {
+          start: {
+            red: 30,
+            green: 30,
+            blue: 30
+          },
+          end: {
+            red: 40,
+            green: 40,
+            blue: 40
+          }
+        },
+        newsArticles: [{
+          title: "효도관광 길 네 모녀 역주행 차량에 '날벼락'"
+        }],
+        skyStatus: "SKY_A02"
+      },
+      {
+        date: new Date(2018,8,1,0,0),
+        temperature: '20',
+        windSpeed: '-',
+        color: {
+          start: {
+            red: 30,
+            green: 30,
+            blue: 30
+          },
+          end: {
+            red: 40,
+            green: 40,
+            blue: 40
+          }
+        },
+        newsArticles: [{
+          title: "효도관광 길 네 모녀 역주행 차량에 '날벼락'"
+        }],
+        skyStatus: "SKY_A02"
+      },
+      {
+        date: new Date(2018,9,1,0,0),
+        temperature: '20',
+        windSpeed: '-',
+        color: {
+          start: {
+            red: 30,
+            green: 30,
+            blue: 30
+          },
+          end: {
+            red: 40,
+            green: 40,
+            blue: 40
+          }
+        },
+        newsArticles: [{
+          title: "효도관광 길 네 모녀 역주행 차량에 '날벼락'"
+        }],
+        skyStatus: "SKY_A02"
+      },
+      {
+        date: new Date(2018,10,1,0,0),
+        temperature: '20',
+        windSpeed: '-',
+        color: {
+          start: {
+            red: 30,
+            green: 30,
+            blue: 30
+          },
+          end: {
+            red: 40,
+            green: 40,
+            blue: 40
+          }
+        },
+        newsArticles: [{
+          title: "효도관광 길 네 모녀 역주행 차량에 '날벼락'"
+        }],
+        skyStatus: "SKY_A02"
       },
     ]
   };
@@ -148,6 +359,7 @@ class TimelineControl extends React.Component {
 
   render() {
     // transform translate3d(200px, 4px, 0)
+    // 365일 milisecond value: 31536000000
     let controlWidth = 700;
     let blockAboutMonth = controlWidth / 12;
 
@@ -169,10 +381,24 @@ class TimelineControl extends React.Component {
         )
       });
 
+    let now = new Date();
+    const nowMonth = now.getMonth();
+
     let newsPoints = getData().data.map((val, idx) => {
+      let date = new Date(val.date);
+      let month = date.getMonth();
+      if (date.getFullYear() >= now.getFullYear()) {
+        month += 11 - nowMonth;
+      } else {
+        month = month - nowMonth - 1;
+      }
+      let daysTranslateX = (date.getDate() / 31) * blockAboutMonth;
+      let monthTranslateX = month * blockAboutMonth;
+      let translateX = (daysTranslateX + monthTranslateX);
+
       return (
         <button className="time-point-button" key={idx} onClick={e => this._onPointClick(val)} style={{
-          left: 50 + idx * 50
+          transform: `translateX(${translateX}px)`
         }}>
           <div className="time-point"></div>
         </button>
