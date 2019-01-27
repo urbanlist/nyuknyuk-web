@@ -22,6 +22,16 @@ import icn_a01 from '../../../assets/icn/icn_a01.svg';
 import icn_a02 from '../../../assets/icn/icn_a02.svg';
 import icn_a03 from '../../../assets/icn/icn_a03.svg';
 import icn_a04 from '../../../assets/icn/icn_a04.svg';
+import icn_a05 from '../../../assets/icn/icn_a05.svg';
+import icn_a06 from '../../../assets/icn/icn_a06.svg';
+import icn_a07 from '../../../assets/icn/icn_a07.svg';
+import icn_a08 from '../../../assets/icn/icn_a08.svg';
+import icn_a09 from '../../../assets/icn/icn_a09.svg';
+import icn_a10 from '../../../assets/icn/icn_a10.svg';
+import icn_a11 from '../../../assets/icn/icn_a11.svg';
+import icn_a12 from '../../../assets/icn/icn_a12.svg';
+import icn_a13 from '../../../assets/icn/icn_a13.svg';
+import icn_a14 from '../../../assets/icn/icn_a14.svg';
 
 
 const convertSkyCodeToName = code => {
@@ -88,61 +98,75 @@ const convertSkyCodeToParameter = code => {
   switch (code) {
     case "SKY_A01":
       result.isDefault = true;
+      result.weatherIcon = icn_a01;
       return result;
     case "SKY_A02":
       result.cloudLevel = 1;
+      result.weatherIcon = icn_a02;
       return result;
     case "SKY_A03":
       result.cloudLevel = 2;
+      result.weatherIcon = icn_a03;
       return result;
     case "SKY_A04":
       result.cloudLevel = 2;
+      result.weatherIcon = icn_a04;
       result.isRain = true;
       return result;
     case "SKY_A05":
       result.cloudLevel = 2;
+      result.weatherIcon = icn_a05;
       result.isSnow = true;
       return result;
     case "SKY_A06":
       result.cloudLevel = 2;
       result.isRain = true;
+      result.weatherIcon = icn_a06;
       result.isSnow = true;
       return result;
     case "SKY_A07":
       result.isOvercase = true;
+      result.weatherIcon = icn_a07;
       return result;
     case "SKY_A08":
       result.isOvercase = true;
+      result.weatherIcon = icn_a08;
       result.isRain = true;
       return result;
     case "SKY_A09":
       result.isOvercase = true;
+      result.weatherIcon = icn_a09;
       result.isSnow = true;
       return result;
     case "SKY_A10":
       result.isOvercase = true;
+      result.weatherIcon = icn_a10;
       result.isRain = true;
       result.isSnow = true;
       return result;
     case "SKY_A11":
       result.isOvercase = true;
       result.isThunder = true;
+      result.weatherIcon = icn_a11;
       return result;
     case "SKY_A12":
       result.isOvercase = true;
       result.isThunder = true;
       result.isRain = true;
+      result.weatherIcon = icn_a12;
       return result;
     case "SKY_A13":
       result.isOvercase = true;
       result.isThunder = true;
       result.isSnow = true;
+      result.weatherIcon = icn_a13;
       return result;
     case "SKY_A14":
       result.isOvercase = true;
       result.isThunder = true;
       result.isRain = true;
       result.isSnow = true;
+      result.weatherIcon = icn_a14;
       return result;
     default:
       return result;
