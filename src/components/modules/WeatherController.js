@@ -7,7 +7,7 @@ class WeatherController {
 
   get(resAction) {
     axios
-      .get('//urbanlist.kr/api/nyuknyuk')
+      .get('https://urbanlist.kr/api/nyuknyuk')
       .then(res => {
         resAction(res.data);
       })

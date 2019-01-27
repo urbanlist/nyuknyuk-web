@@ -8,7 +8,7 @@ class NewsController {
 
   get(resAction) {
     axios
-      .get('//urbanlist.kr/api/nyuknyuk/news')
+      .get('https://urbanlist.kr/api/nyuknyuk/news')
       .then(res => {
         resAction && resAction(res.data);
       })
