@@ -11,14 +11,14 @@ const getData = () => {
         windSpeed: '-',
         color: {
           start: {
-            red: 30,
-            green: 30,
-            blue: 30
+            red: 130,
+            green: 130,
+            blue: 130
           },
           end: {
-            red: 40,
-            green: 40,
-            blue: 40
+            red: 140,
+            green: 140,
+            blue: 140
           }
         },
         newsArticles: [{
@@ -66,7 +66,7 @@ const getData = () => {
         newsArticles: [{
           title: "효도관광 길 네 모녀 역주행 차량에 '날벼락'"
         }],
-        skyStatus: "SKY_A02"
+        skyStatus: "SKY_A14"
       },
       {
         date: new Date(2018,2,1,0,0),
@@ -74,14 +74,14 @@ const getData = () => {
         windSpeed: '-',
         color: {
           start: {
+            red: 10,
+            green: 10,
+            blue: 10
+          },
+          end: {
             red: 30,
             green: 30,
             blue: 30
-          },
-          end: {
-            red: 40,
-            green: 40,
-            blue: 40
           }
         },
         newsArticles: [{
@@ -447,7 +447,8 @@ class TimelineControl extends React.Component {
             </div>
             <div className="end-bar"></div>
             <div className="end-text">
-              <p>TODAY</p>
+              <p>2018</p>
+              <p>12.31</p>
             </div>
           </div>
         </div>
