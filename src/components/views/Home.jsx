@@ -417,7 +417,7 @@ class Home extends React.Component {
           </div>}
           {this.state.bottomViewMode == BottomViewMode.Timeline && <div className="back-to-main">
             <button className="back-to-main" onClick={e => this.viewMain()}>
-              <span style={{ "color": fontColor }}>BACK to now ></span>
+              <span style={{ "color": fontColor }}>현재로 돌아가기 ></span>
               <div className="line" style={{ "backgroundColor": fontColor }}></div>
             </button>
           </div>}
