@@ -1,5 +1,12 @@
 import axios from 'axios';
 
+
+let url = "//localhost:10717";
+if (PRODUCTION) {
+  url = "https://urbanlist.kr";
+}
+
+
 class WeatherController {
   constructor() {
 
@@ -7,7 +14,18 @@ class WeatherController {
 
   get(resAction) {
     axios
-      .get('https://urbanlist.kr/api/nyuknyuk')
+      .get(`${url}/api/nyuknyuk`)
+      .then(res => {
+        resAction(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  getWather(datetime, resAction) {
+    axios
+      .get(`${url}/api/nyuknyuk/monitor?time=${datetime}`)
       .then(res => {
         resAction(res.data);
       })
