@@ -34,6 +34,16 @@ import icn_a13 from '../../../assets/icn/icn_a13.svg';
 import icn_a14 from '../../../assets/icn/icn_a14.svg';
 
 
+const removeNewsCompanyName = str => {
+  let split = str.split('-');
+  if (split.length > 1) {
+    return str.replace(`-${split[split.length-1]}`, '');
+  } else {
+    return str;
+  }
+}
+
+
 const convertSkyCodeToName = code => {
   let dic = {
     "SKY_A01": "맑음",
@@ -399,7 +409,7 @@ class Home extends React.Component {
             <div>{convertSkyCodeToName(this.state.skyStatus) + ", " + this.state.temperature + "°C"}</div>
           </div>
           <div className="place">
-            {"YONGIN"}
+            {"Korea"}
           </div>
         </div>}
         <div className="bottom">
@@ -433,7 +443,9 @@ class Home extends React.Component {
               {this.state.dateStr}
             </div>
             <div className="content">
-              <TextTypingControl text={newsArticles[0].title} speed={80} />
+              <TextTypingControl 
+                text={removeNewsCompanyName(newsArticles[0].title)} 
+                speed={80} />
             </div>
           </div>
         </div>)}
