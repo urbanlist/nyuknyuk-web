@@ -372,7 +372,9 @@ class Home extends React.Component {
       viewMode: ViewMode.Timeline,
       color: data.color,
       skyStatus: data.skyStatus,
-      newsArticles: data.newsArticles,
+      newsArticles: [{
+        title: data.newsArticles
+      }],
       dateStr: DateTimeHelper.toStringForNyukNyuk(data.date),
       temperature: data.temperature,
       windSpeed: data.windSpeed,
@@ -415,7 +417,7 @@ class Home extends React.Component {
         <div className="bottom">
           {this.state.bottomViewMode == BottomViewMode.Main && <div className="bottom-main">
             <button className="timeline" onClick={e => this.viewTimeline()}>
-              <span style={{ "color": fontColor }}>TIMELINE</span>
+              <span style={{ "color": fontColor }}>ONE FINE DAYS</span>
               {createRightIcon()}
             </button>
             <button className="epilog" onClick={e => this.viewEpilog()}>
@@ -423,11 +425,11 @@ class Home extends React.Component {
             </button>
           </div>}
           {this.state.bottomViewMode == BottomViewMode.Timeline && <div className="timeline">
-            <TimelineControl onPointClick={e => this.onTimelinePointClick(e)} />
+            <TimelineControl onPointClick={e => this.onTimelinePointClick(e)} fontColor={fontColor}/>
           </div>}
           {this.state.bottomViewMode == BottomViewMode.Timeline && <div className="back-to-main">
             <button className="back-to-main" onClick={e => this.viewMain()}>
-              <span style={{ "color": fontColor }}>현재로 돌아가기 ></span>
+              <span style={{ "color": fontColor }}>오늘로 돌아가기 ></span>
               <div className="line" style={{ "backgroundColor": fontColor }}></div>
             </button>
           </div>}
