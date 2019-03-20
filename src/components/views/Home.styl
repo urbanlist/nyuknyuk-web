@@ -83,8 +83,13 @@
       position absolute
       width 100%
       bottom 80px
+      button.move-last
+        top 50px
+      button.move-origin
+        top 0px
       button.back-to-main
         animation show-ani .7s 1.2s forwards
+        transition top 2s
         opacity 0
         position relative
         display block
@@ -131,9 +136,9 @@
           left 0px
         svg
           position relative
-          left 55px
+          left 3px
           width 7px
-          top 6px
+          top 8px
       button.epilog
         position relative
         right 20px
@@ -190,4 +195,4 @@
     top 0px
     z-index -10
     & > div
-      transition opacity 2s linear
+      transition opacity 1s linear

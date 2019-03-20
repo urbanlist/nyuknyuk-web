@@ -12,11 +12,13 @@ import RainLayer from '../Layers/RainLayer.jsx';
 import SkyColorLayer from '../Layers/SkyColorLayer.jsx';
 import StarLayer from '../Layers/StarLayer.jsx';
 import TextTypingControl from '../controls/TextTypingControl.jsx';
+import TextFadeInControl from '../controls/TextFadeInControl.jsx';
 import LoadingLayer from '../Layers/LoadingLayer.jsx';
 import EpilogLayer from '../Layers/EpilogLayer.jsx';
 import TimelineControl from '../controls/TimelineControl.jsx';
 import './Home.styl';
 import DateTimeHelper from '../helper/DateTimeHelper.js';
+import classNames from 'classnames';
 
 import icn_a01 from '../../../assets/icn/icn_a01.svg';
 import icn_a02 from '../../../assets/icn/icn_a02.svg';
@@ -256,7 +258,8 @@ class Home extends React.Component {
       },
       newsArticles: [],
       viewMode: ViewMode.News,
-      bottomViewMode: BottomViewMode.Main
+      bottomViewMode: BottomViewMode.Main,
+      isTimelineEnd: false
     };
 
     this.weatherController = new WeatherController();
@@ -335,6 +338,7 @@ class Home extends React.Component {
     this.setState({
       viewMode: ViewMode.Epilog,
       bottomViewMode: BottomViewMode.Epilog,
+      isTimelineEnd: false,
       color: {
         start: {
           red: 150,
@@ -355,7 +359,8 @@ class Home extends React.Component {
     this.stopTimer();
     this.setState({
       viewMode: ViewMode.Timeline,
-      bottomViewMode: BottomViewMode.Timeline
+      bottomViewMode: BottomViewMode.Timeline,
+      isTimelineEnd: false,
     });
   }
 
@@ -363,7 +368,8 @@ class Home extends React.Component {
     this.startTimer();
     this.setState({
       viewMode: ViewMode.News,
-      bottomViewMode: BottomViewMode.Main
+      bottomViewMode: BottomViewMode.Main,
+      isTimelineEnd: false,
     });
   }
 
@@ -378,6 +384,13 @@ class Home extends React.Component {
       dateStr: DateTimeHelper.toStringForNyukNyuk(data.date),
       temperature: data.temperature,
       windSpeed: data.windSpeed,
+    });
+  }
+
+  endTimeline() {
+    console.log("this.endTimeline");
+    this.setState({
+      isTimelineEnd: true
     });
   }
 
@@ -417,7 +430,7 @@ class Home extends React.Component {
         <div className="bottom">
           {this.state.bottomViewMode == BottomViewMode.Main && <div className="bottom-main">
             <button className="timeline" onClick={e => this.viewTimeline()}>
-              <span style={{ "color": fontColor }}>ONE FINE DAYS</span>
+              <span style={{ "color": fontColor }}>One Day</span>
               {createRightIcon()}
             </button>
             <button className="epilog" onClick={e => this.viewEpilog()}>
@@ -425,12 +438,19 @@ class Home extends React.Component {
             </button>
           </div>}
           {this.state.bottomViewMode == BottomViewMode.Timeline && <div className="timeline">
-            <TimelineControl onPointClick={e => this.onTimelinePointClick(e)} fontColor={fontColor}/>
+            <TimelineControl 
+              onPointClick={e => this.onTimelinePointClick(e)} 
+              onEnd={() => this.endTimeline()}
+              fontColor={fontColor}/>
           </div>}
           {this.state.bottomViewMode == BottomViewMode.Timeline && <div className="back-to-main">
-            <button className="back-to-main" onClick={e => this.viewMain()}>
+            <button className={classNames({
+              "back-to-main": true,
+              "move-last": this.state.isTimelineEnd,
+              "move-origin": !this.state.isTimelineEnd
+            })} onClick={e => this.viewMain()}>
               <span style={{ "color": fontColor }}>오늘로 돌아가기 ></span>
-              <div className="line" style={{ "backgroundColor": fontColor }}></div>
+              {/* <div className="line" style={{ "backgroundColor": fontColor }}></div> */}
             </button>
           </div>}
           {/* <div className="infomation">
@@ -442,10 +462,12 @@ class Home extends React.Component {
         {(this.state.viewMode == ViewMode.News || this.state.viewMode == ViewMode.Timeline) && (<div className="center" style={{ "color": fontColor }}>
           <div className="text">
             <div className="datetime">
-              {this.state.dateStr}
+              <TextFadeInControl 
+                text={this.state.dateStr} 
+                speed={80} />
             </div>
             <div className="content">
-              <TextTypingControl 
+              <TextFadeInControl 
                 text={removeNewsCompanyName(newsArticles[0].title)} 
                 speed={80} />
             </div>

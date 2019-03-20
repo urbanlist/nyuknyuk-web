@@ -83,7 +83,7 @@ class TimelineControl extends React.Component {
         })} onClick={e => this.moveLeft()}>
           <svg width="30" height="30">
             <line x1="4" x2="20" y1="16" y2="4" stroke={this.props.fontColor} strokeWidth="2"></line>
-            <line x1="4" x2="20" y1="14" y2="26" stroke={this.props.fontColor} strokeWidth="2"></line>
+            <line x1="4" x2="20" y1="15" y2="26" stroke={this.props.fontColor} strokeWidth="2"></line>
           </svg>
           <div style={{color: this.props.fontColor}}>{remainCount} days</div>
         </button>
