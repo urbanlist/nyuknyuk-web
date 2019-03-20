@@ -1,5 +1,6 @@
 import React from "react";
 import TimelineController from "../modules/TimelineController";
+import classNames from 'classnames';
 import "./TimelineControl.styl";
 
 
@@ -24,8 +25,17 @@ class TimelineControl extends React.Component {
 
   moveLeft() {
     let index = this.state.timelineIndex + 1;
-    if (index >= this.state.timelines.length) {
-      // 마지막임
+    
+    // 마지막
+    if (index == this.state.timelines.length) {
+      if (this.props.onEnd) {
+        this.props.onEnd({});
+      }
+    }
+    if (index > this.state.timelines.length) {
+      if (this.props.onEnd) {
+        this.props.onEnd({});
+      }
       return;
     }
     
@@ -63,14 +73,19 @@ class TimelineControl extends React.Component {
       return <div></div>
     }
 
+    const remainCount = timelines.length - this.state.timelineIndex;
+
     return (
       <div className="timeline-control">
-        <button className="arrow-left" onClick={e => this.moveLeft()}>
+        <button className={classNames({
+          "arrow-left": true,
+          "hidden": remainCount == 0
+        })} onClick={e => this.moveLeft()}>
           <svg width="30" height="30">
             <line x1="4" x2="20" y1="16" y2="4" stroke={this.props.fontColor} strokeWidth="2"></line>
             <line x1="4" x2="20" y1="14" y2="26" stroke={this.props.fontColor} strokeWidth="2"></line>
           </svg>
-          <div style={{color: this.props.fontColor}}>{timelines.length - this.state.timelineIndex} days</div>
+          <div style={{color: this.props.fontColor}}>{remainCount} days</div>
         </button>
       </div>)
   }
