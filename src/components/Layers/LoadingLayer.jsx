@@ -29,7 +29,7 @@ class LoadingLayer extends React.Component {
           <div className="loading-left loading-bar">
             <div className="bar bar-left"></div>
           </div>
-          <div className="title">One Fine Day</div>
+          <div className="title">   One Day</div>
           <div className="loading-right loading-bar">
             <div className="bar bar-right"></div>
           </div>
