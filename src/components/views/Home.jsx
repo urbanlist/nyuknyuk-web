@@ -20,20 +20,34 @@ import './Home.styl';
 import DateTimeHelper from '../helper/DateTimeHelper.js';
 import classNames from 'classnames';
 
-import icn_a01 from '../../../assets/icn/icn_a01.svg';
-import icn_a02 from '../../../assets/icn/icn_a02.svg';
-import icn_a03 from '../../../assets/icn/icn_a03.svg';
-import icn_a04 from '../../../assets/icn/icn_a04.svg';
-import icn_a05 from '../../../assets/icn/icn_a05.svg';
-import icn_a06 from '../../../assets/icn/icn_a06.svg';
-import icn_a07 from '../../../assets/icn/icn_a07.svg';
-import icn_a08 from '../../../assets/icn/icn_a08.svg';
-import icn_a09 from '../../../assets/icn/icn_a09.svg';
-import icn_a10 from '../../../assets/icn/icn_a10.svg';
-import icn_a11 from '../../../assets/icn/icn_a11.svg';
-import icn_a12 from '../../../assets/icn/icn_a12.svg';
-import icn_a13 from '../../../assets/icn/icn_a13.svg';
-import icn_a14 from '../../../assets/icn/icn_a14.svg';
+import icn_a01 from '../../../assets/icn/white/icn_a01.svg';
+import icn_a02 from '../../../assets/icn/white/icn_a02.svg';
+import icn_a03 from '../../../assets/icn/white/icn_a03.svg';
+import icn_a04 from '../../../assets/icn/white/icn_a04.svg';
+import icn_a05 from '../../../assets/icn/white/icn_a05.svg';
+import icn_a06 from '../../../assets/icn/white/icn_a06.svg';
+import icn_a07 from '../../../assets/icn/white/icn_a07.svg';
+import icn_a08 from '../../../assets/icn/white/icn_a08.svg';
+import icn_a09 from '../../../assets/icn/white/icn_a09.svg';
+import icn_a10 from '../../../assets/icn/white/icn_a10.svg';
+import icn_a11 from '../../../assets/icn/white/icn_a11.svg';
+import icn_a12 from '../../../assets/icn/white/icn_a12.svg';
+import icn_a13 from '../../../assets/icn/white/icn_a13.svg';
+import icn_a14 from '../../../assets/icn/white/icn_a14.svg';
+import icn_gray_a01 from '../../../assets/icn/gray/icn_a01.svg';
+import icn_gray_a02 from '../../../assets/icn/gray/icn_a02.svg';
+import icn_gray_a03 from '../../../assets/icn/gray/icn_a03.svg';
+import icn_gray_a04 from '../../../assets/icn/gray/icn_a04.svg';
+import icn_gray_a05 from '../../../assets/icn/gray/icn_a05.svg';
+import icn_gray_a06 from '../../../assets/icn/gray/icn_a06.svg';
+import icn_gray_a07 from '../../../assets/icn/gray/icn_a07.svg';
+import icn_gray_a08 from '../../../assets/icn/gray/icn_a08.svg';
+import icn_gray_a09 from '../../../assets/icn/gray/icn_a09.svg';
+import icn_gray_a10 from '../../../assets/icn/gray/icn_a10.svg';
+import icn_gray_a11 from '../../../assets/icn/gray/icn_a11.svg';
+import icn_gray_a12 from '../../../assets/icn/gray/icn_a12.svg';
+import icn_gray_a13 from '../../../assets/icn/gray/icn_a13.svg';
+import icn_gray_a14 from '../../../assets/icn/gray/icn_a14.svg';
 
 
 const removeNewsCompanyName = str => {
@@ -104,55 +118,66 @@ const convertSkyCodeToParameter = code => {
     isThunder: false,
     isOvercase: false,
     cloudLevel: 0,
-    weatherIcon: icn_a01
+    weatherIcon: icn_a01,
+    weatherGrayIcon: icn_gray_a01
   };
 
   switch (code) {
     case "SKY_A01":
       result.isDefault = true;
       result.weatherIcon = icn_a01;
+      result.weatherGrayIcon = icn_gray_a01;
       return result;
     case "SKY_A02":
       result.cloudLevel = 1;
       result.weatherIcon = icn_a02;
+      result.weatherGrayIcon = icn_gray_a02;
       return result;
     case "SKY_A03":
       result.cloudLevel = 2;
       result.weatherIcon = icn_a03;
+      result.weatherGrayIcon = icn_gray_a03;
       return result;
     case "SKY_A04":
       result.cloudLevel = 2;
       result.weatherIcon = icn_a04;
+      result.weatherGrayIcon = icn_gray_a04;
       result.isRain = true;
       return result;
     case "SKY_A05":
       result.cloudLevel = 2;
       result.weatherIcon = icn_a05;
+      result.weatherGrayIcon = icn_gray_a05;
       result.isSnow = true;
       return result;
     case "SKY_A06":
       result.cloudLevel = 2;
       result.isRain = true;
       result.weatherIcon = icn_a06;
+      result.weatherGrayIcon = icn_gray_a06;
       result.isSnow = true;
       return result;
     case "SKY_A07":
       result.isOvercase = true;
       result.weatherIcon = icn_a07;
+      result.weatherGrayIcon = icn_gray_a07;
       return result;
     case "SKY_A08":
       result.isOvercase = true;
       result.weatherIcon = icn_a08;
+      result.weatherGrayIcon = icn_gray_a08;
       result.isRain = true;
       return result;
     case "SKY_A09":
       result.isOvercase = true;
       result.weatherIcon = icn_a09;
+      result.weatherGrayIcon = icn_gray_a09;
       result.isSnow = true;
       return result;
     case "SKY_A10":
       result.isOvercase = true;
       result.weatherIcon = icn_a10;
+      result.weatherGrayIcon = icn_gray_a10;
       result.isRain = true;
       result.isSnow = true;
       return result;
@@ -160,18 +185,21 @@ const convertSkyCodeToParameter = code => {
       result.isOvercase = true;
       result.isThunder = true;
       result.weatherIcon = icn_a11;
+      result.weatherGrayIcon = icn_gray_a11;
       return result;
     case "SKY_A12":
       result.isOvercase = true;
       result.isThunder = true;
       result.isRain = true;
       result.weatherIcon = icn_a12;
+      result.weatherGrayIcon = icn_gray_a12;
       return result;
     case "SKY_A13":
       result.isOvercase = true;
       result.isThunder = true;
       result.isSnow = true;
       result.weatherIcon = icn_a13;
+      result.weatherGrayIcon = icn_gray_a13;
       return result;
     case "SKY_A14":
       result.isOvercase = true;
@@ -179,6 +207,7 @@ const convertSkyCodeToParameter = code => {
       result.isRain = true;
       result.isSnow = true;
       result.weatherIcon = icn_a14;
+      result.weatherGrayIcon = icn_gray_a14;
       return result;
     default:
       return result;
@@ -205,11 +234,11 @@ const convertMonthToName = month => {
 }
 
 
-const createRightIcon = () => {
+const createRightIcon = (fontColor) => {
   return (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.12 15.41">
     <g><g><polyline style={{
       "fill": "none",
-      "stroke": "#fff",
+      "stroke": fontColor,
       "strokeMiterlimit": 10,
       "strokeWidth": 2
     }} points="0.71 0.71 7.71 7.71 0.71 14.71" /></g></g>
@@ -410,7 +439,8 @@ class Home extends React.Component {
       return (<div className="clarity"> </div>)
     }
 
-    let fontColor = (color.start.red + color.start.green + color.start.blue) / 3 < 140 ? "#fff" : "#000";
+    const isWhiteColor = (color.start.red + color.start.green + color.start.blue) / 3 < 140;
+    let fontColor = isWhiteColor ? "#fff" : "#464849";
 
     return (
       <div className="home">
@@ -418,7 +448,7 @@ class Home extends React.Component {
         {skyAttrs.isDefault && color.isNight == false && clarity()}
         {(this.state.viewMode == ViewMode.News || this.state.viewMode == ViewMode.Timeline) && <div className="top" style={{ "color": fontColor }}>
           <div className="weather-img">
-            <img src={skyAttrs.weatherIcon} />
+            <img src={isWhiteColor ? skyAttrs.weatherIcon : skyAttrs.weatherGrayIcon} />
           </div>
           <div className="weather">
             <div>{convertSkyCodeToName(this.state.skyStatus) + ", " + this.state.temperature + "°C"}</div>
@@ -431,7 +461,7 @@ class Home extends React.Component {
           {this.state.bottomViewMode == BottomViewMode.Main && <div className="bottom-main">
             <button className="timeline" onClick={e => this.viewTimeline()}>
               <span style={{ "color": fontColor }}>One Day</span>
-              {createRightIcon()}
+              {createRightIcon(fontColor)}
             </button>
             <button className="epilog" onClick={e => this.viewEpilog()}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.5 59.93" style={{ fill: fontColor }}><g id="레이어_2" data-name="레이어 2"><g id="레이어_1-2" data-name="레이어 1"><path d="M45.5,0H2A2,2,0,0,0,0,2V57.93a2,2,0,0,0,2,2H29l.36,0,.14,0,.23-.07.14-.08a1.06,1.06,0,0,0,.21-.11,1.42,1.42,0,0,0,.3-.25l16.5-16.5a1.87,1.87,0,0,0,.32-.42l.06-.12a2,2,0,0,0,.17-.48h0a1.58,1.58,0,0,0,0-.38V2A2,2,0,0,0,45.5,0ZM31,53.1V43.43h9.67ZM43.5,39.43H29a2,2,0,0,0-2,2v14.5H4V4H43.5Z" /><rect x="10.75" y="10.93" width="26" height="4" /><rect x="11" y="19.93" width="26" height="4" /><rect x="11" y="28.93" width="26" height="4" /></g></g></svg>
@@ -453,11 +483,6 @@ class Home extends React.Component {
               {/* <div className="line" style={{ "backgroundColor": fontColor }}></div> */}
             </button>
           </div>}
-          {/* <div className="infomation">
-            {this.state.viewMode == ViewMode.News && <button className="epilog-btn" onClick={e => this.viewEpilog()}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.5 59.93" style={{ fill: fontColor }}><g id="레이어_2" data-name="레이어 2"><g id="레이어_1-2" data-name="레이어 1"><path d="M45.5,0H2A2,2,0,0,0,0,2V57.93a2,2,0,0,0,2,2H29l.36,0,.14,0,.23-.07.14-.08a1.06,1.06,0,0,0,.21-.11,1.42,1.42,0,0,0,.3-.25l16.5-16.5a1.87,1.87,0,0,0,.32-.42l.06-.12a2,2,0,0,0,.17-.48h0a1.58,1.58,0,0,0,0-.38V2A2,2,0,0,0,45.5,0ZM31,53.1V43.43h9.67ZM43.5,39.43H29a2,2,0,0,0-2,2v14.5H4V4H43.5Z" /><rect x="10.75" y="10.93" width="26" height="4" /><rect x="11" y="19.93" width="26" height="4" /><rect x="11" y="28.93" width="26" height="4" /></g></g></svg>
-            </button>}
-          </div> */}
         </div>
         {(this.state.viewMode == ViewMode.News || this.state.viewMode == ViewMode.Timeline) && (<div className="center" style={{ "color": fontColor }}>
           <div className="text">
