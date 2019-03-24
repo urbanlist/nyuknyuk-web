@@ -3,11 +3,6 @@
   width 100vw
   height 100vh
   overflow hidden
-  // .sky-color
-  //   position fixed
-  //   width 100%
-  //   height 100%
-  //   transition opacity 4s linear
   @keyframes show-ani
     0%
       opacity 0
@@ -32,6 +27,7 @@
   .top
     position fixed
     width 100%
+    height 100px
     .weather
       z-index 10
       position absolute
@@ -54,6 +50,14 @@
       font-family 'Lato', sans-serif
       font-size 1rem
       font-weight 700
+    .logo
+      position absolute
+      width 100%
+      top 21px
+      z-index 100
+      svg
+        width 100%
+        height 14px
   .center
     height 100%
     display flex
@@ -77,8 +81,9 @@
       font-weight 100
   .bottom
     position fixed
-    height 100%
+    height 10%
     width 100%
+    bottom 0
     div.back-to-main
       position absolute
       width 100%
@@ -136,9 +141,9 @@
           left 0px
         svg
           position relative
-          left 3px
+          right 2px
           width 7px
-          top 8px
+          top 9px
       button.epilog
         position relative
         right 20px

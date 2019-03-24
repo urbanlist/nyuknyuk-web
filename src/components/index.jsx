@@ -13,7 +13,7 @@ import TimelineWeather from './views/TimelineWeather.jsx';
 
 const getPath = () => {
   if (PRODUCTION) {
-    return "/content/nyuknyuk";
+    return "/content/one-fine-day";
   } else {
     return "";
   }

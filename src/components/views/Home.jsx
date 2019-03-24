@@ -19,6 +19,7 @@ import TimelineControl from '../controls/TimelineControl.jsx';
 import './Home.styl';
 import DateTimeHelper from '../helper/DateTimeHelper.js';
 import classNames from 'classnames';
+import SvgHelper from '../helper/SvgHelper.jsx';
 
 import icn_a01 from '../../../assets/icn/white/icn_a01.svg';
 import icn_a02 from '../../../assets/icn/white/icn_a02.svg';
@@ -62,21 +63,21 @@ const removeNewsCompanyName = str => {
 
 const convertSkyCodeToName = code => {
   let dic = {
-    "SKY_A01": "맑음",
-    "SKY_A02": "구름 조금",
-    "SKY_A03": "구름 많음",
-    "SKY_A04": "구름 많고 비",
-    "SKY_A05": "구름 많고 눈",
-    "SKY_A06": "구름 많고 비 또는 눈",
-    "SKY_A07": "흐림",
-    "SKY_A08": "흐리고 비",
-    "SKY_A09": "흐리고 눈",
-    "SKY_A10": "흐리고 비 또는 눈",
-    "SKY_A11": "흐리고 낙뢰",
-    "SKY_A12": "뇌우/비",
-    "SKY_A13": "뇌우/눈",
-    "SKY_A14": "뇌우/비 또는 눈",
-    "none": "알 수 없음"
+    "SKY_A01": "", //"맑음",
+    "SKY_A02": "", //"구름 조금",
+    "SKY_A03": "", //"구름 많음",
+    "SKY_A04": "", //"구름과 비",
+    "SKY_A05": "", //"구름과 눈",
+    "SKY_A06": "", //"구름과 비와 눈",
+    "SKY_A07": "", //"흐림",
+    "SKY_A08": "", //"흐리고 비",
+    "SKY_A09": "", //"흐리고 눈",
+    "SKY_A10": "", //"흐리고 비와 눈",
+    "SKY_A11": "", //"흐리고 낙뢰",
+    "SKY_A12": "", //"뇌우와 비",
+    "SKY_A13": "", //"뇌우와 눈",
+    "SKY_A14": "", //"뇌우와 비와 눈",
+    "none": "", //"알 수 없음"
   }
   if (dic.hasOwnProperty(code)) {
     return dic[code];
@@ -450,8 +451,11 @@ class Home extends React.Component {
           <div className="weather-img">
             <img src={isWhiteColor ? skyAttrs.weatherIcon : skyAttrs.weatherGrayIcon} />
           </div>
+          <a className="logo" href={'https://urbanlist.kr'}>
+            {SvgHelper.CreateLogo(fontColor)}
+          </a>
           <div className="weather">
-            <div>{convertSkyCodeToName(this.state.skyStatus) + ", " + this.state.temperature + "°C"}</div>
+            <div>{convertSkyCodeToName(this.state.skyStatus) + " " + this.state.temperature + "°C"}</div>
           </div>
           <div className="place">
             {"Korea"}
