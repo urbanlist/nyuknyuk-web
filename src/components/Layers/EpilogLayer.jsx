@@ -71,11 +71,17 @@ class EpilogLayer extends React.Component {
       storyEndPoint: -1
     }
     this.isStory4End = false;
+    this.lastClickTime = new Date();
   }
 
   nextStory() {
     let story = this.state.story;
 
+    let nowDate = new Date();
+    nowDate.setSeconds(nowDate.getSeconds() - 1);
+    if (this.lastClickTime >= nowDate) {
+      return;
+    }
     if (story == 4) {
       if (this.isStory4End == false) {
         return;
@@ -98,6 +104,8 @@ class EpilogLayer extends React.Component {
     this.setState({
       story: story
     });
+
+    this.lastClickTime = new Date();
   }
 
   onAnimationEnd(pagePoint) {
