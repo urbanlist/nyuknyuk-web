@@ -18,22 +18,22 @@ class SkyColorLayer extends React.Component {
             <div className="sky-color" style={{
             "backgroundImage": this.backgroundToggle ? lastBackground : currentBackground,
             "opacity": this.backgroundToggle ? 0 : 1,
-            // "transitionDelay": "0s"
+            "transitionDelay": "0s"
             }}></div>
             <div className="sky-color" style={{
             "backgroundImage": this.backgroundToggle ? lastBackground : currentBackground,
             "opacity": this.backgroundToggle ? 0 : 1,
-            // "transitionDelay": "2s"
+            "transitionDelay": ".5s"
             }}></div>
             <div className="sky-color" style={{
             "backgroundImage": this.backgroundToggle ? currentBackground : lastBackground,
             "opacity": this.backgroundToggle ? 1 : 0,
-            // "transitionDelay": "0s"
+            "transitionDelay": "0s"
             }}></div>
             <div className="sky-color" style={{
             "backgroundImage": this.backgroundToggle ? currentBackground : lastBackground,
             "opacity": this.backgroundToggle ? 1 : 0,
-            // "transitionDelay": "2s"
+            "transitionDelay": ".5s"
             }}></div>
         </div>)
     }
