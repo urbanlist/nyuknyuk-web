@@ -385,6 +385,13 @@ class Home extends React.Component {
     });
   }
 
+  setSkyLayer(data) {
+    this.setState({
+      color: data.color,
+      skyStatus: data.skyStatus
+    })
+  }
+
   viewTimeline() {
     this.stopTimer();
     this.setState({
@@ -533,7 +540,7 @@ class Home extends React.Component {
           </div>
         </div>
         {PRODUCTION && <LoadingLayer />}
-        {this.state.viewMode == ViewMode.Epilog && <EpilogLayer />}
+        {this.state.viewMode == ViewMode.Epilog && <EpilogLayer onChangeSky={e => this.setSkyLayer(e.data)}/>}
       </div>
     )
   }
