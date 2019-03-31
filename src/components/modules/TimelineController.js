@@ -2,6 +2,7 @@ import axios from 'axios';
 
 
 let url = "//localhost:10717";
+url = "https://urbanlist.kr";
 if (PRODUCTION) {
   url = "https://urbanlist.kr";
 }
