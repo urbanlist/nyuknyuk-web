@@ -6,7 +6,8 @@ import './CloudLayer.styl';
 
 
 const buildCloudHeight = () => {
-  return Random(0, 35) - 13;
+  const val = Random(0, 35) - 13;
+  return val;
 }
 
 
@@ -32,11 +33,15 @@ class CloudLayer extends React.Component {
     let cloudTuple = this.state.cloudKeys;
 
     let height = buildCloudHeight();
+    let whileCount = 0;
     if (cloudTuple.length > 0) {
       let lastedCloudHeight = cloudTuple[cloudTuple.length-1][1];
       while (lastedCloudHeight + 20 > height &&
              lastedCloudHeight - 20 < height) {
         height = buildCloudHeight();
+        whileCount += 1;
+        if (whileCount > 100)
+          return;
       }
     }
 
@@ -62,11 +67,6 @@ class CloudLayer extends React.Component {
   }
 
   render() {
-    let cloudType = this.props.cloudType;
-    if (cloudType != 1) {
-      return (<div></div>);
-    }
-
     let cloudSpeed = window.innerWidth / 20;
 
     return (
