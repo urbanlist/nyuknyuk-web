@@ -16,7 +16,6 @@ class TimelineControl extends React.Component {
   }
 
   async componentDidMount() {
-    console.log(await this.timelineController.getAsync());
     this.setState({
       timelines: await this.timelineController.getAsync(),
       timelineIndex: 0

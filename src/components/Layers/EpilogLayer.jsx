@@ -120,17 +120,17 @@ class EpilogLayer extends React.Component {
         this.onChangeSky({
           color: {
             start: {
-              red: 130,
-              green: 130,
-              blue: 180
+              red: 117,
+              green: 147,
+              blue: 194
             },
             end: {
-              red: 90,
-              green: 90,
-              blue: 130
+              red: 92,
+              green: 122,
+              blue: 169
             }
           },
-          skyStatus: "SKY_A01"
+          skyStatus: "SKY_A02"
         });
       break;
       case 4:
@@ -154,14 +154,14 @@ class EpilogLayer extends React.Component {
         this.onChangeSky({
           color: {
             start: {
-              red: 60,
-              green: 60,
-              blue: 90
+              red: 97,
+              green: 127,
+              blue: 174
             },
             end: {
-              red: 70,
-              green: 70,
-              blue: 110
+              red: 72,
+              green: 102,
+              blue: 149
             }
           },
           skyStatus: "SKY_A03"
@@ -171,31 +171,31 @@ class EpilogLayer extends React.Component {
         this.onChangeSky({
           color: {
             start: {
-              red: 50,
-              green: 50,
-              blue: 80
+              red: 87,
+              green: 117,
+              blue: 164
             },
             end: {
-              red: 60,
-              green: 60,
-              blue: 90
+              red: 62,
+              green: 92,
+              blue: 139
             }
           },
           skyStatus: "SKY_A03"
         });
       break;
-      case 7:
+      case 8:
         this.onChangeSky({
           color: {
             start: {
-              red: 25,
-              green: 25,
-              blue: 60
+              red: 67,
+              green: 97,
+              blue: 144
             },
             end: {
-              red: 55,
-              green: 55,
-              blue: 85
+              red: 52,
+              green: 62,
+              blue: 119
             }
           },
           skyStatus: "SKY_A03"
@@ -222,15 +222,15 @@ class EpilogLayer extends React.Component {
         this.onChangeSky({
           color: {
             start: {
-              red: 30,
-              green: 30,
-              blue: 50
+              red: 40,
+              green: 60,
+              blue: 80
             },
             end: {
               red: 50,
-              green: 50,
+              green: 40,
               blue: 80
-            }
+            } 
           },
           skyStatus: "SKY_A03"
         });
@@ -239,32 +239,34 @@ class EpilogLayer extends React.Component {
         this.onChangeSky({
           color: {
             start: {
-              red: 10,
-              green: 5,
-              blue: 15
+              red: 20,
+              green: 15,
+              blue: 35
             },
             end: {
               red: 50,
-              green: 18,
+              green: 37,
               blue: 60
-            }
+            },
+            isNight: true
           },
           skyStatus: "SKY_A02"
-        });
+        })
       break;
       case 12:
         this.onChangeSky({
           color: {
             start: {
-              red: 10,
-              green: 5,
-              blue: 15
+              red: 20,
+              green: 15,
+              blue: 35
             },
             end: {
-              red: 45,
-              green: 15,
-              blue: 55
-            }
+              red: 40,
+              green: 37,
+              blue: 30
+            },
+            isNight: true
           },
           skyStatus: "SKY_A02"
         });
@@ -273,17 +275,18 @@ class EpilogLayer extends React.Component {
         this.onChangeSky({
           color: {
             start: {
-              red: 10,
-              green: 5,
-              blue: 15
+              red: 15,
+              green: 10,
+              blue: 20
             },
             end: {
               red: 20,
-              green: 10,
-              blue: 30
-            }
+              green: 25,
+              blue: 40
+            },
+            isNight: true
           },
-          skyStatus: "SKY_A02"
+          skyStatus: "SKY_A01"
         });
       break;
     }
@@ -387,7 +390,6 @@ class EpilogLayer extends React.Component {
             {story == 12 && <div className="text text-fadein">
               <p className={typingClass}>이 작업은</p>
               <p className={typingClass}>그 속상하고 이상한 순간들을</p>
-              <p className={typingClass}></p>
               <p className={typingClass}>애도하기 위해 만들었다.</p>
               <p className={typingClass} onAnimationEnd={e => this.onAnimationEnd(12)}><span className="next">{createRightIcon()}</span></p>
             </div>}

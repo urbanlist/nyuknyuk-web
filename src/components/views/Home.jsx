@@ -342,11 +342,12 @@ class Home extends React.Component {
 
   setWeather() {
     this.weatherController.get(data => {
+      const color = convertColorAsSkyStatus(data.color, data.status);
       this.setState({
         temperature: data.temperature,
         skyStatus: data.sky.status,
         windSpeed: data.wind.speed,
-        color: data.color
+        color: color
       });
     });
     this.newsController.get(data => {
@@ -365,27 +366,29 @@ class Home extends React.Component {
 
   viewEpilog() {
     this.stopTimer();
+    const color = convertColorAsSkyStatus({
+      start: {
+        red: 150,
+        green: 150,
+        blue: 190
+      },
+      end: {
+        red: 100,
+        green: 100,
+        blue: 140
+      }
+    }, "SKY_A02");
+
     this.setState({
       viewMode: ViewMode.Epilog,
       bottomViewMode: BottomViewMode.Epilog,
       isTimelineEnd: false,
-      color: {
-        start: {
-          red: 150,
-          green: 150,
-          blue: 190
-        },
-        end: {
-          red: 100,
-          green: 100,
-          blue: 140
-        }
-      },
+      color: color,
       skyStatus: "SKY_A02"
     });
   }
 
-  setSkyLayer(data) {
+  setSkyLayerAsEpilog(data) {
     this.setState({
       color: data.color,
       skyStatus: data.skyStatus
@@ -411,9 +414,10 @@ class Home extends React.Component {
   }
 
   onTimelinePointClick(data) {
+    const color = convertColorAsSkyStatus(data.color, data.skyStatus);
     this.setState({
       viewMode: ViewMode.Timeline,
-      color: data.color,
+      color: color,
       skyStatus: data.skyStatus,
       newsArticles: [{
         title: data.newsArticles
@@ -425,7 +429,6 @@ class Home extends React.Component {
   }
 
   endTimeline() {
-    console.log("this.endTimeline");
     this.setState({
       isTimelineEnd: true
     });
@@ -441,7 +444,7 @@ class Home extends React.Component {
 
     let newsArticles = this.state.newsArticles.length > 0 ? this.state.newsArticles : [{ title: "-" }];
 
-    let color = convertColorAsSkyStatus(this.state.color, skyStatus);
+    const color = this.state.color
 
     let clarity = () => {
       return (<div className="clarity"> </div>)
@@ -540,7 +543,7 @@ class Home extends React.Component {
           </div>
         </div>
         {PRODUCTION && <LoadingLayer />}
-        {this.state.viewMode == ViewMode.Epilog && <EpilogLayer onChangeSky={e => this.setSkyLayer(e.data)}/>}
+        {this.state.viewMode == ViewMode.Epilog && <EpilogLayer onChangeSky={e => this.setSkyLayerAsEpilog(e.data)}/>}
       </div>
     )
   }
