@@ -342,7 +342,7 @@ class Home extends React.Component {
 
   setWeather() {
     this.weatherController.get(data => {
-      const color = convertColorAsSkyStatus(data.color, data.status);
+      const color = convertColorAsSkyStatus(data.color, data.sky.status);
       this.setState({
         temperature: data.temperature,
         skyStatus: data.sky.status,
