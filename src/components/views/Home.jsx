@@ -464,9 +464,9 @@ class Home extends React.Component {
           <a className="logo" href={'https://urbanlist.kr'}>
             {SvgHelper.CreateLogo(fontColor)}
           </a>
-          <div className="weather">
+          {/* <div className="weather">
             <div>{convertSkyCodeToName(this.state.skyStatus) + " " + this.state.temperature + "°C"}</div>
-          </div>
+          </div> */}
           <div className="place">
             {"Korea"}
           </div>
@@ -505,11 +505,11 @@ class Home extends React.Component {
                 text={this.state.dateStr} 
                 speed={80} />
             </div>
-            <div className="content">
+            {/* <div className="content">
               <TextFadeInControl 
                 text={removeNewsCompanyName(newsArticles[0].title)} 
                 speed={80} />
-            </div>
+            </div> */}
           </div>
         </div>)}
         <div className="sky">
