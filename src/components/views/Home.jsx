@@ -505,11 +505,11 @@ class Home extends React.Component {
                 text={this.state.dateStr} 
                 speed={80} />
             </div>
-            {/* <div className="content">
+            {this.state.viewMode == ViewMode.Timeline && <div className="content">
               <TextFadeInControl 
                 text={removeNewsCompanyName(newsArticles[0].title)} 
                 speed={80} />
-            </div> */}
+            </div>}
           </div>
         </div>)}
         <div className="sky">
